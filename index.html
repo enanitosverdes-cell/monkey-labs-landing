@@ -43,9 +43,9 @@
 
 <style>
 :root{
-  --orange:#FF7A00; --orange-deep:#E86600; --orange-soft:#FFB266; --orange-glow:rgba(255,122,0,.4);
+  --orange:#FF7A00; --orange-deep:#E86600; --orange-soft:#FFB266; --orange-neon:#FF9433; --orange-glow:rgba(255,122,0,.55);
   --cream:#FAF3E7; --mocha:#A88B7A; --brown:#3B2A18;
-  --bg:#07070B; --bg-2:#0B0B12; --surface:#11111A; --surface-2:#161622;
+  --bg:#000000; --bg-2:#06060A; --surface:#0E0E14; --surface-2:#13131C;
   --line:rgba(250,243,231,0.08); --line-strong:rgba(250,243,231,0.18);
   --fg:#FAF3E7; --fg-soft:rgba(250,243,231,0.78);
   --fg-muted:rgba(250,243,231,0.56); --fg-quiet:rgba(250,243,231,0.38);
@@ -88,7 +88,7 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 /* ===== TYPOGRAPHY ===== */
 .display{
   font-family:var(--font-display); font-weight:400;
-  font-size:clamp(56px,9vw,128px); line-height:.94; letter-spacing:-0.03em;
+  font-size:clamp(52px,8.2vw,112px); line-height:.96; letter-spacing:-0.028em;
 }
 .display em{font-style:italic; color:var(--orange)}
 h2.section-title{
@@ -170,29 +170,93 @@ p:last-child{margin-bottom:0}
 @media (max-width:920px){ .nav-links{display:none} }
 @media (max-width:520px){ .nav-cta .btn-ghost{display:none} }
 
-/* ===== HERO (centered) ===== */
+/* ===== HERO (centered, monkey neon backdrop) ===== */
 .hero{
   position:relative;
-  padding:clamp(72px,11vw,150px) 0 clamp(72px,9vw,130px);
+  padding:clamp(80px,11vw,160px) 0 clamp(80px,9vw,140px);
   overflow:hidden;
   text-align:center;
+  background:#000;
 }
 .hero-mesh{
   position:absolute; inset:-30%; z-index:0; pointer-events:none;
   background:
-    radial-gradient(50% 50% at 50% 35%, rgba(255,122,0,0.20), transparent 60%),
-    radial-gradient(28% 22% at 30% 60%, rgba(255,122,0,0.10), transparent 70%),
-    radial-gradient(28% 22% at 70% 60%, rgba(255,122,0,0.10), transparent 70%);
-  filter:blur(24px);
+    radial-gradient(45% 45% at 50% 45%, rgba(255,122,0,0.22), transparent 60%),
+    radial-gradient(28% 22% at 25% 65%, rgba(255,122,0,0.10), transparent 70%),
+    radial-gradient(28% 22% at 75% 65%, rgba(255,122,0,0.10), transparent 70%);
+  filter:blur(28px);
   animation:mesh 12s var(--ease) infinite;
 }
 @keyframes mesh{
-  0%,100%{transform:translate3d(0,0,0) scale(1)}
-  50%{transform:translate3d(0,-14px,0) scale(1.03)}
+  0%,100%{transform:translate3d(0,0,0) scale(1); opacity:.9}
+  50%{transform:translate3d(0,-16px,0) scale(1.04); opacity:1}
 }
 @media (prefers-reduced-motion: reduce){ .hero-mesh{animation:none} }
 
-.hero-inner{position:relative; z-index:1; max-width:920px; margin:0 auto}
+/* Monkey silhouette: outline neon orange, breathing glow */
+.monkey-bg{
+  position:absolute; top:50%; left:50%;
+  width:clamp(420px,58vw,720px); aspect-ratio:1/1;
+  transform:translate(-50%,-50%);
+  z-index:0; pointer-events:none;
+  opacity:.95;
+  filter:drop-shadow(0 0 14px rgba(255,122,0,.55)) drop-shadow(0 0 34px rgba(255,122,0,.3));
+  animation:breathe-mono 5.5s var(--ease) infinite;
+}
+.monkey-bg svg{width:100%; height:100%}
+.monkey-bg .stroke{
+  fill:none; stroke:var(--orange-neon); stroke-width:.9;
+  stroke-linecap:round; stroke-linejoin:round;
+  vector-effect:non-scaling-stroke;
+}
+.monkey-bg .stroke-soft{
+  fill:none; stroke:rgba(255,122,0,.45); stroke-width:.5;
+  stroke-linecap:round; stroke-linejoin:round;
+}
+@keyframes breathe-mono{
+  0%,100%{
+    filter:drop-shadow(0 0 14px rgba(255,122,0,.55)) drop-shadow(0 0 34px rgba(255,122,0,.3));
+    transform:translate(-50%,-50%) scale(1);
+  }
+  50%{
+    filter:drop-shadow(0 0 22px rgba(255,122,0,.8)) drop-shadow(0 0 60px rgba(255,122,0,.45));
+    transform:translate(-50%,-50%) scale(1.03);
+  }
+}
+@media (prefers-reduced-motion: reduce){ .monkey-bg{animation:none} }
+
+/* Subtle scanline crawl around the monkey to suggest "voltage" */
+.monkey-bg::after{
+  content:""; position:absolute; inset:0; border-radius:50%;
+  background:conic-gradient(from 0deg, transparent 0%, rgba(255,122,0,.18) 8%, transparent 16%, transparent 100%);
+  -webkit-mask:radial-gradient(circle, transparent 56%, #000 58%, #000 62%, transparent 64%);
+  mask:radial-gradient(circle, transparent 56%, #000 58%, #000 62%, transparent 64%);
+  animation:orbit 9s linear infinite;
+  pointer-events:none;
+}
+@keyframes orbit{ to{ transform:rotate(360deg) } }
+@media (prefers-reduced-motion: reduce){ .monkey-bg::after{animation:none} }
+
+.hero-inner{position:relative; z-index:2; max-width:960px; margin:0 auto}
+
+/* Multi-color typography (Dapta-style mix) */
+.display .word-cream{color:var(--cream)}
+.display .word-orange{
+  color:var(--orange);
+  text-shadow:0 0 22px rgba(255,122,0,.55), 0 0 48px rgba(255,122,0,.3);
+}
+.display .word-gradient{
+  background:linear-gradient(110deg, var(--orange) 0%, var(--cream) 45%, var(--orange-deep) 100%);
+  -webkit-background-clip:text; background-clip:text;
+  color:transparent;
+  -webkit-text-fill-color:transparent;
+}
+.display .word-outline{
+  color:transparent;
+  -webkit-text-stroke:1.5px var(--orange);
+  text-shadow:0 0 18px rgba(255,122,0,.35);
+}
+.display em{font-style:italic}
 
 .eyebrow{
   display:inline-flex; align-items:center; gap:10px;
@@ -706,15 +770,36 @@ body::after{
 <!-- ====== HERO ====== -->
 <section class="hero">
   <div class="hero-mesh" aria-hidden="true"></div>
+  <div class="monkey-bg" aria-hidden="true">
+    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <g class="stroke">
+        <path d="M30 8 C 30 13, 28 15, 26 17"/>
+        <path d="M16 22 C 12 22, 9 25, 9 30 C 9 34, 12 37, 15 38"/>
+        <path d="M48 22 C 52 22, 55 25, 55 30 C 55 34, 52 37, 49 38"/>
+        <path d="M16 22 C 16 14, 22 10, 32 10 C 42 10, 48 14, 48 22 L48 38 C 48 48, 42 54, 32 54 C 22 54, 16 48, 16 38 Z"/>
+        <path d="M22 28 L22 32"/>
+        <path d="M42 28 L42 32"/>
+        <path d="M19 24 L26 26"/>
+        <path d="M45 24 L38 26"/>
+        <path d="M23 42 C 28 46, 36 46, 41 42"/>
+      </g>
+      <g class="stroke-soft">
+        <path d="M14 36 C 12 38, 12 42, 14 44"/>
+        <path d="M50 36 C 52 38, 52 42, 50 44"/>
+      </g>
+    </svg>
+  </div>
+
   <div class="container">
     <div class="hero-inner">
       <span class="eyebrow"><span class="pulse"></span>Producto en vivo · Demo público</span>
       <h1 class="display">
-        Tu empresa<br/>
-        trabajando <em>24/7</em> con IA.
+        <span class="word-cream">Tu empresa</span><br/>
+        <span class="word-orange">trabajando 24/7</span><br/>
+        <span class="word-gradient"><em>con IA.</em></span>
       </h1>
       <p class="lede">
-        Plataforma SaaS unificada con voice agents, dashboard, inventario y cobranzas. Convierte tu operación en resultados — sin call centers, sin seis herramientas desconectadas.
+        Voice agents, dashboard, inventario y cobranzas en una sola plataforma. Tu operación funcionando sola — sin seis herramientas desconectadas.
       </p>
       <div class="hero-ctas">
         <a class="btn btn-primary btn-xl" href="https://wa.me/573057582101?text=Hola%2C%20vengo%20de%20monkeylabsai.com%20y%20me%20interesa%20agendar%20una%20demo%20de%20la%20plataforma%20para%20mi%20empresa." target="_blank" rel="noopener" data-magnetic>
@@ -729,7 +814,7 @@ body::after{
 
       <div class="hero-stats">
         <div class="stat fade-in">
-          <div class="stat-num"><span data-counter="1" data-suffix="s">~1</span><span style="font-family:var(--font-sans);font-size:.4em;color:var(--cream);margin-left:4px">s</span></div>
+          <div class="stat-num"><span style="font-family:var(--font-sans);font-size:.55em;color:var(--cream);margin-right:2px">~</span><span data-counter="1">0</span><span style="font-family:var(--font-sans);font-size:.4em;color:var(--cream);margin-left:4px">s</span></div>
           <div class="stat-label">Latencia voice agent</div>
         </div>
         <div class="stat fade-in">
@@ -749,9 +834,9 @@ body::after{
 <section class="results" id="resultados">
   <div class="container">
     <div class="section-head fade-in">
-      <span class="kicker">El número del sector</span>
-      <h2 class="section-title">Tu operación ya está<br/><em>dejando dinero sobre la mesa.</em></h2>
-      <p class="lede">No son cifras nuestras. Son los benchmarks del sector que explican por qué tu equipo no convierte lo que entra.</p>
+      <span class="kicker">Los números del sector</span>
+      <h2 class="section-title"><span class="word-cream">Tu operación ya está</span><br/><span class="word-orange"><em>dejando dinero</em></span> <span class="word-cream">sobre la mesa.</span></h2>
+      <p class="lede">No son cifras nuestras. Son los benchmarks que explican por qué tu equipo no convierte lo que entra.</p>
     </div>
     <div class="results-grid">
       <article class="result-card fade-in">
@@ -778,8 +863,8 @@ body::after{
   <div class="container">
     <div class="section-head fade-in">
       <span class="kicker">Voice agents IA</span>
-      <h2 class="section-title">Tu próximo call center<br/><em>no necesita personas.</em></h2>
-      <p class="lede">Agentes de voz en español natural, con ~1 segundo de latencia, que cobran, agendan, atienden y verifican — al mismo tiempo, sin pausas, sin turnos.</p>
+      <h2 class="section-title"><span class="word-cream">Tu próximo call center</span><br/><span class="word-orange"><em>no necesita personas.</em></span></h2>
+      <p class="lede">Español natural, ~1 segundo de latencia. Cobran, agendan, atienden — al mismo tiempo, sin turnos.</p>
     </div>
     <div class="agents-grid">
       <article class="agent fade-in">
@@ -818,8 +903,8 @@ body::after{
   <div class="container">
     <div class="section-head fade-in">
       <span class="kicker">Pruébalo ahora</span>
-      <h2 class="section-title">Esto no es una promesa.<br/><em>Es producto en producción.</em></h2>
-      <p class="lede">Abre el demo público y opera la plataforma. Es exactamente la misma que está corriendo hoy — con datos de prueba.</p>
+      <h2 class="section-title"><span class="word-cream">Esto no es una promesa.</span><br/><span class="word-orange"><em>Es producto en producción.</em></span></h2>
+      <p class="lede">Abre el demo y opera la plataforma. Es exactamente la misma que corre hoy — con datos de prueba.</p>
     </div>
     <div class="demo-wrap fade-in">
       <div class="demo-screen" aria-hidden="true">
@@ -882,40 +967,12 @@ body::after{
   </div>
 </section>
 
-<!-- ====== HOW IT WORKS (3 pasos) ====== -->
-<section class="how">
-  <div class="container">
-    <div class="section-head fade-in">
-      <span class="kicker">Cómo funciona</span>
-      <h2 class="section-title">De cero a operando,<br/><em>en tres pasos.</em></h2>
-      <p class="lede">Una metodología seria es la mejor prueba. Así es como entra tu empresa en producción.</p>
-    </div>
-    <div class="steps">
-      <article class="step fade-in">
-        <div class="step-circle">01</div>
-        <h3>Diagnóstico de fugas</h3>
-        <p>Auditamos dónde se está perdiendo dinero hoy. Salimos con un número concreto.</p>
-      </article>
-      <article class="step fade-in">
-        <div class="step-circle">02</div>
-        <h3>Implementación a la medida</h3>
-        <p>Conectamos los módulos que necesitas con tu stack. Sin migrar todo de cero.</p>
-      </article>
-      <article class="step fade-in">
-        <div class="step-circle">03</div>
-        <h3>Operación 24/7</h3>
-        <p>Tu equipo se libera. La plataforma trabaja todo el día con resultados medibles.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
 <!-- ====== MODULES (centered simple grid) ====== -->
 <section class="modules" id="modulos">
   <div class="container">
     <div class="section-head fade-in">
       <span class="kicker">Capacidades</span>
-      <h2 class="section-title">Ocho módulos.<br/><em>Un solo sistema.</em></h2>
+      <h2 class="section-title"><span class="word-cream">Ocho módulos.</span> <span class="word-orange"><em>Un solo sistema.</em></span></h2>
       <p class="lede">Cada uno resuelve una fuga concreta. Comparten el mismo dato y el mismo dashboard.</p>
     </div>
     <div class="mods">
@@ -968,8 +1025,8 @@ body::after{
   <div class="container">
     <div class="section-head fade-in">
       <span class="kicker">Para quién es</span>
-      <h2 class="section-title">Una plataforma,<br/><em>seis operaciones.</em></h2>
-      <p class="lede">Si tu equipo apaga incendios en seis herramientas, esto es para ti. Elige el escenario que más se parece a tu día a día.</p>
+      <h2 class="section-title"><span class="word-cream">Una plataforma,</span> <span class="word-orange"><em>seis operaciones.</em></span></h2>
+      <p class="lede">Elige el escenario que más se parece a tu día a día.</p>
     </div>
     <div class="tabs" role="tablist">
       <button class="tab active" data-tab="clinicas" role="tab" aria-selected="true">Clínicas y med spas</button>
@@ -1037,8 +1094,8 @@ body::after{
   <div class="container">
     <div class="section-head fade-in">
       <span class="kicker">Quién está detrás</span>
-      <h2 class="section-title">Construido por fundadores<br/>con <em>producto en vivo.</em></h2>
-      <p class="lede">No vendemos roadmaps. La plataforma del demo es la que estamos operando hoy. Esa transparencia es nuestra fortaleza.</p>
+      <h2 class="section-title"><span class="word-cream">Fundadores con</span><br/><span class="word-orange"><em>producto en vivo.</em></span></h2>
+      <p class="lede">La plataforma del demo es la que estamos operando hoy.</p>
     </div>
     <div class="founders-grid">
       <article class="founder fade-in">
@@ -1067,68 +1124,13 @@ body::after{
   </div>
 </section>
 
-<!-- ====== TRUST ====== -->
-<section class="trust">
-  <div class="container">
-    <div class="section-head fade-in">
-      <span class="kicker">Seriedad de plataforma</span>
-      <h2 class="section-title">Construido como software<br/>que <em>opera tu negocio.</em></h2>
-      <p class="lede">Manejamos llamadas, cobros e inventario en producción. La seguridad no es addon — es la base.</p>
-    </div>
-    <div class="trust-grid">
-      <article class="trust-card fade-in">
-        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l9 4v6c0 5-4 9-9 10-5-1-9-5-9-10V6z"/></svg></div>
-        <h3>Row-Level Security</h3>
-        <p>Aislamiento garantizado a nivel de base de datos.</p>
-      </article>
-      <article class="trust-card fade-in">
-        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-        <h3>Cifrado E2E</h3>
-        <p>TLS 1.3 en todas las llamadas, secrets en bóveda.</p>
-      </article>
-      <article class="trust-card fade-in">
-        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-        <h3>Habeas Data + GDPR</h3>
-        <p>Ley 1581 de Colombia y GDPR. Datos auditables.</p>
-      </article>
-      <article class="trust-card fade-in">
-        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <h3>Soporte del founder</h3>
-        <p>En esta etapa, los fundadores responden directo.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ====== PRICING ====== -->
-<section class="pricing">
-  <div class="container">
-    <div class="price-card fade-in">
-      <span class="kicker">Modelo</span>
-      <h2 class="section-title" style="margin-top:6px">Setup a la medida +<br/><em>mantenimiento mensual.</em></h2>
-      <p class="lede" style="margin:20px auto 0">Cada operación es distinta. Diseñamos tu plan en la demo, con tus números reales — sin paquetes inventados.</p>
-      <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-top:32px">
-        <a class="btn btn-primary btn-lg" href="https://wa.me/573057582101?text=Hola%2C%20vengo%20de%20monkeylabsai.com%20y%20me%20interesa%20agendar%20una%20demo%20de%20la%20plataforma%20para%20mi%20empresa." target="_blank" rel="noopener" data-magnetic>
-          Diseña tu plan en la demo
-          <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-      <div class="price-meta">
-        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Fee de implementación</span>
-        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Mantenimiento mensual</span>
-        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Por módulo activado</span>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ====== FINAL CTA ====== -->
 <section class="cta-final" id="cta">
   <div class="container">
     <div class="cta-card fade-in">
       <span class="kicker">El siguiente paso</span>
-      <h2 class="section-title">Mira cuánto está<br/><em>fugando tu operación hoy.</em></h2>
-      <p class="lede" style="margin:14px auto 0; max-width:52ch">30 minutos. Sin slides genéricos — abrimos la plataforma con datos de tu nicho y salimos con un número concreto.</p>
+      <h2 class="section-title"><span class="word-cream">Mira cuánto está</span><br/><span class="word-orange"><em>fugando</em></span> <span class="word-cream">tu operación hoy.</span></h2>
+      <p class="lede" style="margin:18px auto 0; max-width:50ch">30 minutos. Abrimos la plataforma con datos de tu nicho y salimos con un número concreto.</p>
       <div class="ctas">
         <a class="btn btn-primary btn-xl" href="https://wa.me/573057582101?text=Hola%2C%20vengo%20de%20monkeylabsai.com%20y%20me%20interesa%20agendar%20una%20demo%20de%20la%20plataforma%20para%20mi%20empresa." target="_blank" rel="noopener" data-magnetic>
           Agenda tu demo
@@ -1136,10 +1138,10 @@ body::after{
         </a>
         <a class="btn btn-ghost btn-xl" href="https://app.monkeylabsai.com" target="_blank" rel="noopener">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-          Probar el demo primero
+          Probar demo
         </a>
       </div>
-      <p class="micro">Responde un fundador directo por WhatsApp · +57 305 758 2101</p>
+      <p class="micro">Setup + mantenimiento mensual · Responde un founder · WhatsApp +57 305 758 2101</p>
     </div>
   </div>
 </section>
