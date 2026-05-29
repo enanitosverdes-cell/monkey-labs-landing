@@ -266,17 +266,24 @@ body.menu-open .nav-toggle span::after{top:0; transform:rotate(-45deg)}
 }
 @media (prefers-reduced-motion: reduce){ .monkey-bg{animation:none} }
 
-/* Subtle scanline crawl around the monkey to suggest "voltage" */
+/* Orbiting comet ring around the monkey — bright, glowing */
 .monkey-bg::after{
-  content:""; position:absolute; inset:0; border-radius:50%;
-  background:conic-gradient(from 0deg, transparent 0%, rgba(255,122,0,.18) 8%, transparent 16%, transparent 100%);
-  -webkit-mask:radial-gradient(circle, transparent 56%, #000 58%, #000 62%, transparent 64%);
-  mask:radial-gradient(circle, transparent 56%, #000 58%, #000 62%, transparent 64%);
-  animation:orbit 9s linear infinite;
+  content:""; position:absolute; inset:-3%; border-radius:50%;
+  background:conic-gradient(from 0deg,
+    rgba(255,122,0,.07) 0deg,
+    rgba(255,122,0,.07) 235deg,
+    rgba(255,122,0,.22) 290deg,
+    rgba(255,122,0,.65) 332deg,
+    #FFC489 356deg,
+    rgba(255,122,0,.07) 360deg);
+  -webkit-mask:radial-gradient(circle, transparent 55%, #000 57.5%, #000 62.5%, transparent 65%);
+  mask:radial-gradient(circle, transparent 55%, #000 57.5%, #000 62.5%, transparent 65%);
+  filter:drop-shadow(0 0 7px rgba(255,122,0,.75));
+  animation:orbit 7s linear infinite;
   pointer-events:none;
 }
 @keyframes orbit{ to{ transform:rotate(360deg) } }
-@media (prefers-reduced-motion: reduce){ .monkey-bg::after{animation:none} }
+@media (prefers-reduced-motion: reduce){ .monkey-bg::after{animation:none; background:conic-gradient(from 0deg, rgba(255,122,0,.18) 0deg, rgba(255,122,0,.18) 360deg)} }
 
 /* Inner readability veil so the headline always wins */
 .hero::before{
@@ -945,8 +952,8 @@ section{overflow:hidden}
   .deco.curl{display:none}
   .deco.banana{opacity:.3; width:clamp(48px,13vw,72px)}
   .deco.mini-monkey{opacity:.12}
-  /* smaller monkey backdrop so headline dominates on phones */
-  .monkey-bg{width:82vw; opacity:.4}
+  /* phone: lift the monkey up behind the headline (not over the CTAs) */
+  .monkey-bg{width:86vw; opacity:.42; top:32%}
   /* UGC cards a touch smaller, still prominent */
   .ugc-card{width:74vw; max-width:300px}
   /* give the page bottom room so the fixed companion never covers the footer CTA */
