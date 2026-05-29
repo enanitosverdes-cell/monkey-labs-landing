@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="Monkey Labs AI · Tu empresa trabajando 24/7 con IA" />
 <meta name="twitter:description" content="Plataforma SaaS unificada con voice agents y dashboard." />
 
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23FF7A00'/><g fill='none' stroke='%23FAF3E7' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'><path d='M30 8 C 30 13, 28 15, 26 17'/><path d='M16 22 C 12 22, 9 25, 9 30 C 9 34, 12 37, 15 38 M48 22 C 52 22, 55 25, 55 30 C 55 34, 52 37, 49 38 M16 22 C 16 14, 22 10, 32 10 C 42 10, 48 14, 48 22 L48 38 C 48 48, 42 54, 32 54 C 22 54, 16 48, 16 38 Z'/><path d='M22 28 L22 32'/><path d='M42 28 L42 32'/><path d='M19 24 L26 26'/><path d='M45 24 L38 26'/><path d='M23 42 C 28 46, 36 46, 41 42'/></g></svg>" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23000'/><g fill='none'><path d='M37 6 C 39 10, 38 14, 33.5 15.5 C 36 12.5 36 9 34.5 6.2 Z' fill='%23FF7A00'/><circle cx='13.5' cy='31' r='7.5' stroke='%23FF7A00' stroke-width='4.4'/><circle cx='50.5' cy='31' r='7.5' stroke='%23FF7A00' stroke-width='4.4'/><path d='M18.5 25 C 18.5 16, 24.5 11, 32 11 C 39.5 11, 45.5 16, 45.5 25 L45.5 37 C 45.5 46.5, 39.5 52.5, 32 52.5 C 24.5 52.5, 18.5 46.5, 18.5 37 Z' stroke='%23FF7A00' stroke-width='4.4' stroke-linejoin='round'/><path d='M24.5 29.5 C 26 27.2, 30 27.6, 30 31 C 28 32.4, 24.8 31.8, 24.5 29.5 Z' fill='%23FF7A00'/><path d='M39.5 29.5 C 38 27.2, 34 27.6, 34 31 C 36 32.4, 39.2 31.8, 39.5 29.5 Z' fill='%23FF7A00'/><path d='M29.5 37.5 L34.5 37.5' stroke='%23FF7A00' stroke-width='2.6' stroke-linecap='round'/><path d='M25 42 C 28.5 47, 35.5 47, 39 42' stroke='%23FF7A00' stroke-width='2.8' stroke-linecap='round'/></g></svg>" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -150,15 +150,15 @@ p:last-child{margin-bottom:0}
   border-bottom:1px solid var(--line);
 }
 .nav-inner{display:flex; align-items:center; justify-content:space-between; height:72px; gap:16px}
-.brand{display:flex; align-items:center; gap:11px; font-weight:700; font-size:16px; letter-spacing:-0.015em}
+.brand{display:flex; align-items:center; gap:10px; font-weight:700; font-size:16px; letter-spacing:-0.015em}
 .brand .mark{
-  width:32px; height:32px; border-radius:9px; background:var(--orange);
+  width:38px; height:38px;
   display:grid; place-items:center;
-  box-shadow:0 0 0 1px rgba(0,0,0,.15) inset, 0 6px 16px -8px rgba(255,122,0,.55);
   transition:transform .4s var(--ease-out);
+  filter:drop-shadow(0 0 10px rgba(255,122,0,.45));
 }
-.brand:hover .mark{transform:rotate(-6deg) scale(1.05)}
-.brand .mark svg{width:24px; height:24px; color:var(--cream)}
+.brand:hover .mark{transform:rotate(-8deg) scale(1.08)}
+.brand .mark svg{width:38px; height:38px}
 .brand small{color:var(--fg-muted); font-weight:500; font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-left:4px}
 .nav-links{display:flex; gap:2px}
 .nav-links a{
@@ -203,16 +203,16 @@ p:last-child{margin-bottom:0}
   filter:drop-shadow(0 0 18px rgba(255,122,0,.65)) drop-shadow(0 0 48px rgba(255,122,0,.35));
   animation:breathe-mono 5.5s var(--ease) infinite;
 }
-.monkey-bg svg{width:100%; height:100%}
+.monkey-bg svg{width:100%; height:100%; overflow:visible}
 .monkey-bg .stroke{
-  fill:none; stroke:var(--orange-neon); stroke-width:.85;
-  stroke-linecap:round; stroke-linejoin:round;
-  vector-effect:non-scaling-stroke;
-}
-.monkey-bg .stroke-soft{
-  fill:none; stroke:rgba(255,122,0,.4); stroke-width:.5;
+  fill:none; stroke:var(--orange-neon); stroke-width:4.4;
   stroke-linecap:round; stroke-linejoin:round;
 }
+.monkey-bg .stroke-thin{
+  fill:none; stroke:var(--orange-neon); stroke-width:2.7;
+  stroke-linecap:round; stroke-linejoin:round;
+}
+.monkey-bg .fill{ fill:var(--orange-neon); stroke:none }
 @keyframes breathe-mono{
   0%,100%{
     filter:drop-shadow(0 0 18px rgba(255,122,0,.65)) drop-shadow(0 0 48px rgba(255,122,0,.35));
@@ -741,6 +741,113 @@ footer{border-top:1px solid var(--line); padding:56px 0 36px; background:var(--b
 :focus-visible{outline:2px solid var(--orange); outline-offset:3px; border-radius:6px}
 a:focus-visible{outline-offset:4px}
 
+/* ===== Scroll companion (real monkey follows you) ===== */
+.scroll-monkey{
+  position:fixed; right:22px; bottom:22px; z-index:90;
+  width:76px; height:76px; border-radius:50%;
+  display:grid; place-items:center;
+  opacity:0; transform:translateY(20px) scale(.8);
+  pointer-events:none;
+  transition:opacity .5s var(--ease), transform .5s var(--ease-out);
+}
+.scroll-monkey.show{opacity:1; transform:translateY(0) scale(1); pointer-events:auto}
+.scroll-monkey .ring{position:absolute; inset:0; width:100%; height:100%; transform:rotate(-90deg)}
+.scroll-monkey .ring .track{fill:none; stroke:rgba(255,122,0,.18); stroke-width:5}
+.scroll-monkey .ring .prog{
+  fill:none; stroke:var(--orange); stroke-width:5; stroke-linecap:round;
+  stroke-dasharray:289; stroke-dashoffset:289;
+  filter:drop-shadow(0 0 5px rgba(255,122,0,.7));
+  transition:stroke-dashoffset .15s linear;
+}
+.scroll-monkey .face{
+  position:absolute; inset:7px; border-radius:50%; overflow:hidden;
+  box-shadow:0 8px 24px -6px rgba(255,122,0,.55), 0 0 0 1px rgba(255,122,0,.25);
+  background:#11111A;
+}
+.scroll-monkey .face img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s var(--ease)}
+.scroll-monkey:hover .face img{transform:scale(1.08)}
+.scroll-monkey .tip{
+  position:absolute; right:calc(100% + 12px); top:50%; transform:translateY(-50%) translateX(6px);
+  white-space:nowrap; background:var(--orange); color:#0A0A0F;
+  font-family:var(--font-sans); font-weight:600; font-size:13px;
+  padding:8px 14px; border-radius:999px;
+  opacity:0; pointer-events:none; transition:opacity .3s var(--ease), transform .3s var(--ease-out);
+  box-shadow:0 8px 20px -6px rgba(255,122,0,.6);
+}
+.scroll-monkey .tip::after{
+  content:""; position:absolute; left:100%; top:50%; transform:translateY(-50%);
+  border:6px solid transparent; border-left-color:var(--orange);
+}
+.scroll-monkey:hover .tip{opacity:1; transform:translateY(-50%) translateX(0)}
+.scroll-monkey .pulse-dot{
+  position:absolute; top:4px; right:4px; width:14px; height:14px; border-radius:50%;
+  background:#28c840; border:2px solid #000; z-index:3;
+  box-shadow:0 0 0 0 rgba(40,200,64,.6); animation:pulse-live 2s var(--ease) infinite;
+}
+@keyframes pulse-live{
+  0%{box-shadow:0 0 0 0 rgba(40,200,64,.55)}
+  70%{box-shadow:0 0 0 8px rgba(40,200,64,0)}
+  100%{box-shadow:0 0 0 0 rgba(40,200,64,0)}
+}
+@media (max-width:600px){ .scroll-monkey{width:62px; height:62px; right:16px; bottom:16px} .scroll-monkey .tip{display:none} }
+@media (prefers-reduced-motion: reduce){ .scroll-monkey .pulse-dot{animation:none} .scroll-monkey{transition:opacity .3s} }
+
+/* ===== GOLD BANNER (recover the leak) ===== */
+.gold-banner{
+  margin-top:clamp(28px,4vw,48px);
+  display:grid; grid-template-columns:.85fr 1.15fr; gap:0;
+  border:1px solid var(--line-strong); border-radius:var(--radius-xl);
+  overflow:hidden; background:linear-gradient(180deg,var(--surface),var(--surface-2));
+}
+@media (max-width:780px){ .gold-banner{grid-template-columns:1fr} }
+.gold-banner .ph{position:relative; min-height:280px; overflow:hidden}
+.gold-banner .ph img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 30%}
+.gold-banner .ph::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(90deg, transparent 40%, var(--surface) 99%);
+}
+@media (max-width:780px){ .gold-banner .ph::after{background:linear-gradient(180deg, transparent 50%, var(--surface) 99%)} .gold-banner .ph{min-height:240px} }
+.gold-banner .body{padding:clamp(28px,4vw,48px); display:flex; flex-direction:column; justify-content:center; gap:14px}
+.gold-banner h3{font-family:var(--font-display); font-weight:400; font-size:clamp(28px,3.4vw,44px); line-height:1.05; letter-spacing:-0.02em; color:var(--cream)}
+.gold-banner h3 em{font-style:italic; color:var(--orange)}
+.gold-banner p{font-size:15px; color:var(--fg-soft); max-width:46ch; line-height:1.6}
+
+/* ===== UGC GALLERY (marquee) ===== */
+.ugc{padding:clamp(56px,7vw,100px) 0; background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 50%,var(--bg) 100%); position:relative}
+.ugc .section-head{text-align:center; margin:0 auto clamp(36px,4vw,56px); max-width:760px}
+.ugc .kicker{justify-content:center}
+.marquee{
+  position:relative; width:100%; overflow:hidden;
+  -webkit-mask:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee-track{
+  display:flex; gap:18px; width:max-content;
+  animation:marquee 38s linear infinite;
+}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes marquee{ to{ transform:translateX(calc(-50% - 9px)) } }
+@media (prefers-reduced-motion: reduce){ .marquee-track{animation:none; flex-wrap:nowrap; overflow-x:auto} }
+.ugc-card{
+  position:relative; flex:0 0 auto;
+  width:clamp(220px,24vw,300px); aspect-ratio:4/5;
+  border-radius:var(--radius-lg); overflow:hidden;
+  border:1px solid var(--line);
+  box-shadow:var(--shadow-card);
+}
+.ugc-card img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .6s var(--ease-out)}
+.ugc-card::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, transparent 55%, rgba(0,0,0,.55));
+  pointer-events:none;
+}
+.ugc-card .cap{
+  position:absolute; left:14px; bottom:12px; z-index:2;
+  font-family:var(--font-mono); font-size:11px; letter-spacing:.08em;
+  color:var(--cream); text-shadow:0 1px 6px rgba(0,0,0,.8);
+}
+.ugc-card:hover img{transform:scale(1.06)}
+
 /* ===== Decorative Monkey + Banana system ===== */
 .deco{
   position:absolute; pointer-events:none; z-index:0;
@@ -789,12 +896,21 @@ body::after{
   <div class="container nav-inner">
     <a class="brand" href="#">
       <span class="mark">
-        <svg viewBox="0 0 64 64" fill="none" stroke="#FAF3E7" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M30 8 C 30 13, 28 15, 26 17"/>
-          <path d="M16 22 C 12 22, 9 25, 9 30 C 9 34, 12 37, 15 38 M48 22 C 52 22, 55 25, 55 30 C 55 34, 52 37, 49 38 M16 22 C 16 14, 22 10, 32 10 C 42 10, 48 14, 48 22 L48 38 C 48 48, 42 54, 32 54 C 22 54, 16 48, 16 38 Z"/>
-          <path d="M22 28 L22 32"/><path d="M42 28 L42 32"/>
-          <path d="M19 24 L26 26"/><path d="M45 24 L38 26"/>
-          <path d="M23 42 C 28 46, 36 46, 41 42"/>
+        <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <!-- copete -->
+          <path d="M37 6 C 39 10, 38 14, 33.5 15.5 C 36 12.5 36 9 34.5 6.2 Z" fill="#FF7A00"/>
+          <!-- orejas -->
+          <circle cx="13.5" cy="31" r="7.5" stroke="#FF7A00" stroke-width="4.4"/>
+          <circle cx="50.5" cy="31" r="7.5" stroke="#FF7A00" stroke-width="4.4"/>
+          <!-- cabeza -->
+          <path d="M18.5 25 C 18.5 16, 24.5 11, 32 11 C 39.5 11, 45.5 16, 45.5 25 L45.5 37 C 45.5 46.5, 39.5 52.5, 32 52.5 C 24.5 52.5, 18.5 46.5, 18.5 37 Z" stroke="#FF7A00" stroke-width="4.4" stroke-linejoin="round"/>
+          <!-- ojos -->
+          <path d="M24.5 29.5 C 26 27.2, 30 27.6, 30 31 C 28 32.4, 24.8 31.8, 24.5 29.5 Z" fill="#FF7A00"/>
+          <path d="M39.5 29.5 C 38 27.2, 34 27.6, 34 31 C 36 32.4, 39.2 31.8, 39.5 29.5 Z" fill="#FF7A00"/>
+          <!-- nariz -->
+          <path d="M29.5 37.5 L34.5 37.5" stroke="#FF7A00" stroke-width="2.6" stroke-linecap="round"/>
+          <!-- sonrisa -->
+          <path d="M25 42 C 28.5 47, 35.5 47, 39 42" stroke="#FF7A00" stroke-width="2.8" stroke-linecap="round"/>
         </svg>
       </span>
       <span>Monkey Labs<small>AI</small></span>
@@ -804,6 +920,7 @@ body::after{
       <a href="#voice-agents">Voice agents</a>
       <a href="#modulos">Módulos</a>
       <a href="#industrias">Industrias</a>
+      <a href="#cultura">Cultura</a>
       <a href="#fundadores">Fundadores</a>
     </nav>
     <div class="nav-cta">
@@ -815,6 +932,17 @@ body::after{
     </div>
   </div>
 </header>
+
+<!-- ====== SCROLL COMPANION (real monkey follows you) ====== -->
+<a class="scroll-monkey" id="scrollMonkey" href="https://wa.me/573057582101?text=Hola%2C%20vengo%20de%20monkeylabsai.com%20y%20me%20interesa%20agendar%20una%20demo%20de%20la%20plataforma%20para%20mi%20empresa." target="_blank" rel="noopener" aria-label="Agenda tu demo por WhatsApp">
+  <svg class="ring" viewBox="0 0 100 100" aria-hidden="true">
+    <circle class="track" cx="50" cy="50" r="46"/>
+    <circle class="prog" id="scrollRing" cx="50" cy="50" r="46"/>
+  </svg>
+  <span class="pulse-dot" aria-hidden="true"></span>
+  <span class="face"><img src="/img/mono-companion.jpg" alt="" loading="lazy" /></span>
+  <span class="tip">Agenda tu demo 🐵</span>
+</a>
 
 <!-- ====== HERO ====== -->
 <section class="hero">
@@ -848,21 +976,14 @@ body::after{
 
   <div class="monkey-bg" aria-hidden="true">
     <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-      <g class="stroke">
-        <path d="M30 8 C 30 13, 28 15, 26 17"/>
-        <path d="M16 22 C 12 22, 9 25, 9 30 C 9 34, 12 37, 15 38"/>
-        <path d="M48 22 C 52 22, 55 25, 55 30 C 55 34, 52 37, 49 38"/>
-        <path d="M16 22 C 16 14, 22 10, 32 10 C 42 10, 48 14, 48 22 L48 38 C 48 48, 42 54, 32 54 C 22 54, 16 48, 16 38 Z"/>
-        <path d="M22 28 L22 32"/>
-        <path d="M42 28 L42 32"/>
-        <path d="M19 24 L26 26"/>
-        <path d="M45 24 L38 26"/>
-        <path d="M23 42 C 28 46, 36 46, 41 42"/>
-      </g>
-      <g class="stroke-soft">
-        <path d="M14 36 C 12 38, 12 42, 14 44"/>
-        <path d="M50 36 C 52 38, 52 42, 50 44"/>
-      </g>
+      <path class="fill" d="M37 6 C 39 10, 38 14, 33.5 15.5 C 36 12.5 36 9 34.5 6.2 Z"/>
+      <circle class="stroke" cx="13.5" cy="31" r="7.5"/>
+      <circle class="stroke" cx="50.5" cy="31" r="7.5"/>
+      <path class="stroke" d="M18.5 25 C 18.5 16, 24.5 11, 32 11 C 39.5 11, 45.5 16, 45.5 25 L45.5 37 C 45.5 46.5, 39.5 52.5, 32 52.5 C 24.5 52.5, 18.5 46.5, 18.5 37 Z"/>
+      <path class="fill" d="M24.5 29.5 C 26 27.2, 30 27.6, 30 31 C 28 32.4, 24.8 31.8, 24.5 29.5 Z"/>
+      <path class="fill" d="M39.5 29.5 C 38 27.2, 34 27.6, 34 31 C 36 32.4, 39.2 31.8, 39.5 29.5 Z"/>
+      <path class="stroke-thin" d="M29.5 37.5 L34.5 37.5"/>
+      <path class="stroke-thin" d="M25 42 C 28.5 47, 35.5 47, 39 42"/>
     </svg>
   </div>
 
@@ -945,6 +1066,20 @@ body::after{
         <div class="result-label">Mercado SaaS empresarial proyectado a 2030</div>
         <div class="result-source">Gartner · Enterprise Software Forecast</div>
       </article>
+    </div>
+
+    <div class="gold-banner fade-in">
+      <div class="ph"><img src="/img/mono-gold.jpg" alt="Mono Monkey Labs sosteniendo un lingote de oro con la marca grabada" loading="lazy"/></div>
+      <div class="body">
+        <h3>Ese oro <em>ya es tuyo.</em><br/>Solo está mal guardado.</h3>
+        <p>El dinero que se fuga por respuestas lentas, cobros sin seguimiento y stock sin reponer no está perdido — está esperando que alguien lo recupere. Eso hace la plataforma, 24/7.</p>
+        <div>
+          <a class="btn btn-primary" href="https://wa.me/573057582101?text=Hola%2C%20vengo%20de%20monkeylabsai.com%20y%20me%20interesa%20agendar%20una%20demo%20de%20la%20plataforma%20para%20mi%20empresa." target="_blank" rel="noopener" data-magnetic>
+            Recupéralo con una demo
+            <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1217,6 +1352,34 @@ body::after{
   </div>
 </section>
 
+<!-- ====== UGC GALLERY ====== -->
+<section class="ugc" id="cultura">
+  <div class="container">
+    <div class="section-head fade-in">
+      <span class="kicker">La marca, viva</span>
+      <h2 class="section-title"><span class="word-cream">No somos otra</span> <span class="word-orange"><em>SaaS gris.</em></span></h2>
+      <p class="lede" style="margin:0 auto">Energía, actitud y producto real. Así se ve Monkey Labs por fuera del dashboard.</p>
+    </div>
+  </div>
+  <div class="marquee" aria-label="Galería de la marca Monkey Labs">
+    <div class="marquee-track">
+      <figure class="ugc-card"><img src="/img/ugc-banana.jpg" alt="Mono Monkey Labs sosteniendo una banana con la marca grabada" loading="lazy"/><figcaption class="cap">Monkey Labs AI</figcaption></figure>
+      <figure class="ugc-card"><img src="/img/ugc-kiss.jpg" alt="Mono Monkey Labs con gafas y lata de la marca" loading="lazy"/><figcaption class="cap">Spark energy</figcaption></figure>
+      <figure class="ugc-card"><img src="/img/ugc-skate.jpg" alt="Mono Monkey Labs con camiseta de la marca en el skatepark" loading="lazy"/><figcaption class="cap">Live fully</figcaption></figure>
+      <figure class="ugc-card"><img src="/img/ugc-chill.jpg" alt="Mono Monkey Labs relajado tomando la bebida" loading="lazy"/><figcaption class="cap">Good vibes</figcaption></figure>
+      <figure class="ugc-card"><img src="/img/ugc-drink.jpg" alt="Mono Monkey Labs con tenis y la bebida" loading="lazy"/><figcaption class="cap">Active lifestyle</figcaption></figure>
+      <figure class="ugc-card"><img src="/img/ugc-box.jpg" alt="Caja de bebidas Monkey Labs AI en la playa" loading="lazy"/><figcaption class="cap">12-pack</figcaption></figure>
+      <!-- duplicate for seamless loop -->
+      <figure class="ugc-card" aria-hidden="true"><img src="/img/ugc-banana.jpg" alt="" loading="lazy"/><figcaption class="cap">Monkey Labs AI</figcaption></figure>
+      <figure class="ugc-card" aria-hidden="true"><img src="/img/ugc-kiss.jpg" alt="" loading="lazy"/><figcaption class="cap">Spark energy</figcaption></figure>
+      <figure class="ugc-card" aria-hidden="true"><img src="/img/ugc-skate.jpg" alt="" loading="lazy"/><figcaption class="cap">Live fully</figcaption></figure>
+      <figure class="ugc-card" aria-hidden="true"><img src="/img/ugc-chill.jpg" alt="" loading="lazy"/><figcaption class="cap">Good vibes</figcaption></figure>
+      <figure class="ugc-card" aria-hidden="true"><img src="/img/ugc-drink.jpg" alt="" loading="lazy"/><figcaption class="cap">Active lifestyle</figcaption></figure>
+      <figure class="ugc-card" aria-hidden="true"><img src="/img/ugc-box.jpg" alt="" loading="lazy"/><figcaption class="cap">12-pack</figcaption></figure>
+    </div>
+  </div>
+</section>
+
 <!-- ====== FOUNDERS ====== -->
 <section class="founders" id="fundadores">
   <div class="deco mini-monkey float-slow" style="top:10%; left:4%; opacity:.14" aria-hidden="true">
@@ -1315,12 +1478,15 @@ body::after{
       <div>
         <a class="brand" href="#" style="margin-bottom:8px">
           <span class="mark">
-            <svg viewBox="0 0 64 64" fill="none" stroke="#FAF3E7" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M30 8 C 30 13, 28 15, 26 17"/>
-              <path d="M16 22 C 12 22, 9 25, 9 30 C 9 34, 12 37, 15 38 M48 22 C 52 22, 55 25, 55 30 C 55 34, 52 37, 49 38 M16 22 C 16 14, 22 10, 32 10 C 42 10, 48 14, 48 22 L48 38 C 48 48, 42 54, 32 54 C 22 54, 16 48, 16 38 Z"/>
-              <path d="M22 28 L22 32"/><path d="M42 28 L42 32"/>
-              <path d="M19 24 L26 26"/><path d="M45 24 L38 26"/>
-              <path d="M23 42 C 28 46, 36 46, 41 42"/>
+            <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+              <path d="M37 6 C 39 10, 38 14, 33.5 15.5 C 36 12.5 36 9 34.5 6.2 Z" fill="#FF7A00"/>
+              <circle cx="13.5" cy="31" r="7.5" stroke="#FF7A00" stroke-width="4.4"/>
+              <circle cx="50.5" cy="31" r="7.5" stroke="#FF7A00" stroke-width="4.4"/>
+              <path d="M18.5 25 C 18.5 16, 24.5 11, 32 11 C 39.5 11, 45.5 16, 45.5 25 L45.5 37 C 45.5 46.5, 39.5 52.5, 32 52.5 C 24.5 52.5, 18.5 46.5, 18.5 37 Z" stroke="#FF7A00" stroke-width="4.4" stroke-linejoin="round"/>
+              <path d="M24.5 29.5 C 26 27.2, 30 27.6, 30 31 C 28 32.4, 24.8 31.8, 24.5 29.5 Z" fill="#FF7A00"/>
+              <path d="M39.5 29.5 C 38 27.2, 34 27.6, 34 31 C 36 32.4, 39.2 31.8, 39.5 29.5 Z" fill="#FF7A00"/>
+              <path d="M29.5 37.5 L34.5 37.5" stroke="#FF7A00" stroke-width="2.6" stroke-linecap="round"/>
+              <path d="M25 42 C 28.5 47, 35.5 47, 39 42" stroke="#FF7A00" stroke-width="2.8" stroke-linecap="round"/>
             </svg>
           </span>
           <span>Monkey Labs<small>AI</small></span>
@@ -1492,6 +1658,41 @@ body::after{
       }
     });
   });
+
+  /* Scroll companion: progress ring + show after hero + tiny follow tilt */
+  (function(){
+    var monkey = document.getElementById('scrollMonkey');
+    var ring = document.getElementById('scrollRing');
+    if (!monkey || !ring) return;
+    var CIRC = 2 * Math.PI * 46; // r=46
+    ring.style.strokeDasharray = CIRC;
+    var hero = document.querySelector('.hero');
+    var lastY = window.pageYOffset, ticking = false;
+
+    function update(){
+      var st = window.pageYOffset || document.documentElement.scrollTop;
+      var docH = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = docH > 0 ? Math.min(st / docH, 1) : 0;
+      ring.style.strokeDashoffset = CIRC * (1 - pct);
+
+      var heroH = hero ? hero.offsetHeight * 0.6 : 400;
+      if (st > heroH) monkey.classList.add('show');
+      else monkey.classList.remove('show');
+
+      if (!reduceMotion){
+        var dir = st - lastY;
+        var tilt = Math.max(-8, Math.min(8, dir * 0.4));
+        var face = monkey.querySelector('.face');
+        if (face) face.style.transform = 'rotate(' + tilt + 'deg)';
+      }
+      lastY = st;
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if (!ticking){ requestAnimationFrame(update); ticking = true; }
+    }, { passive:true });
+    update();
+  })();
 })();
 </script>
 </body>
