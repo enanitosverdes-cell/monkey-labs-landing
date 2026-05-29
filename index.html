@@ -236,24 +236,33 @@ body.menu-open .nav-toggle span::after{top:0; transform:rotate(-45deg)}
 /* Monkey silhouette: outline neon orange, breathing glow, bigger but lower opacity for legibility */
 .monkey-bg{
   position:absolute; top:52%; left:50%;
-  width:clamp(380px,48vw,600px); aspect-ratio:1/1;
+  width:clamp(420px,52vw,680px); aspect-ratio:1/1;
   transform:translate(-50%,-50%);
   z-index:0; pointer-events:none;
-  opacity:.5;
-  filter:drop-shadow(0 0 26px rgba(255,122,0,.55)) drop-shadow(0 0 70px rgba(255,122,0,.35));
+  opacity:.45;
+  filter:drop-shadow(0 0 18px rgba(255,122,0,.6)) drop-shadow(0 0 48px rgba(255,122,0,.32));
   animation:breathe-mono 5.5s var(--ease) infinite;
 }
-.monkey-bg img{width:100%; height:100%; object-fit:contain; display:block}
+.monkey-bg svg{width:100%; height:100%; overflow:visible}
+.monkey-bg .stroke{
+  fill:none; stroke:var(--orange-neon); stroke-width:4.4;
+  stroke-linecap:round; stroke-linejoin:round;
+}
+.monkey-bg .stroke-thin{
+  fill:none; stroke:var(--orange-neon); stroke-width:2.7;
+  stroke-linecap:round; stroke-linejoin:round;
+}
+.monkey-bg .fill{ fill:var(--orange-neon); stroke:none }
 @keyframes breathe-mono{
   0%,100%{
-    filter:drop-shadow(0 0 26px rgba(255,122,0,.55)) drop-shadow(0 0 70px rgba(255,122,0,.35));
+    filter:drop-shadow(0 0 18px rgba(255,122,0,.6)) drop-shadow(0 0 48px rgba(255,122,0,.32));
     transform:translate(-50%,-50%) scale(1);
-    opacity:.5;
+    opacity:.45;
   }
   50%{
-    filter:drop-shadow(0 0 38px rgba(255,122,0,.8)) drop-shadow(0 0 100px rgba(255,122,0,.5));
+    filter:drop-shadow(0 0 28px rgba(255,122,0,.85)) drop-shadow(0 0 78px rgba(255,122,0,.48));
     transform:translate(-50%,-50%) scale(1.03);
-    opacity:.62;
+    opacity:.55;
   }
 }
 @media (prefers-reduced-motion: reduce){ .monkey-bg{animation:none} }
@@ -1030,7 +1039,16 @@ body::after{
   </div>
 
   <div class="monkey-bg" aria-hidden="true">
-    <img src="/img/logo-monkey.png" alt="" />
+    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <path class="fill" d="M37 6 C 39 10, 38 14, 33.5 15.5 C 36 12.5 36 9 34.5 6.2 Z"/>
+      <circle class="stroke" cx="13.5" cy="31" r="7.5"/>
+      <circle class="stroke" cx="50.5" cy="31" r="7.5"/>
+      <path class="stroke" d="M18.5 25 C 18.5 16, 24.5 11, 32 11 C 39.5 11, 45.5 16, 45.5 25 L45.5 37 C 45.5 46.5, 39.5 52.5, 32 52.5 C 24.5 52.5, 18.5 46.5, 18.5 37 Z"/>
+      <path class="fill" d="M24.5 29.5 C 26 27.2, 30 27.6, 30 31 C 28 32.4, 24.8 31.8, 24.5 29.5 Z"/>
+      <path class="fill" d="M39.5 29.5 C 38 27.2, 34 27.6, 34 31 C 36 32.4, 39.2 31.8, 39.5 29.5 Z"/>
+      <path class="stroke-thin" d="M29.5 37.5 L34.5 37.5"/>
+      <path class="stroke-thin" d="M25 42 C 28.5 47, 35.5 47, 39 42"/>
+    </svg>
   </div>
 
   <div class="container">
