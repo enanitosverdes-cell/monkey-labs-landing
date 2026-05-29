@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="Monkey Labs AI · Tu empresa trabajando 24/7 con IA" />
 <meta name="twitter:description" content="Plataforma SaaS unificada con voice agents y dashboard." />
 
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23000'/><g fill='none'><path d='M37 6 C 39 10, 38 14, 33.5 15.5 C 36 12.5 36 9 34.5 6.2 Z' fill='%23FF7A00'/><circle cx='13.5' cy='31' r='7.5' stroke='%23FF7A00' stroke-width='4.4'/><circle cx='50.5' cy='31' r='7.5' stroke='%23FF7A00' stroke-width='4.4'/><path d='M18.5 25 C 18.5 16, 24.5 11, 32 11 C 39.5 11, 45.5 16, 45.5 25 L45.5 37 C 45.5 46.5, 39.5 52.5, 32 52.5 C 24.5 52.5, 18.5 46.5, 18.5 37 Z' stroke='%23FF7A00' stroke-width='4.4' stroke-linejoin='round'/><path d='M24.5 29.5 C 26 27.2, 30 27.6, 30 31 C 28 32.4, 24.8 31.8, 24.5 29.5 Z' fill='%23FF7A00'/><path d='M39.5 29.5 C 38 27.2, 34 27.6, 34 31 C 36 32.4, 39.2 31.8, 39.5 29.5 Z' fill='%23FF7A00'/><path d='M29.5 37.5 L34.5 37.5' stroke='%23FF7A00' stroke-width='2.6' stroke-linecap='round'/><path d='M25 42 C 28.5 47, 35.5 47, 39 42' stroke='%23FF7A00' stroke-width='2.8' stroke-linecap='round'/></g></svg>" />
+<link rel="icon" type="image/png" href="/img/logo-monkey.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -152,13 +152,13 @@ p:last-child{margin-bottom:0}
 .nav-inner{display:flex; align-items:center; justify-content:space-between; height:72px; gap:16px}
 .brand{display:flex; align-items:center; gap:10px; font-weight:700; font-size:16px; letter-spacing:-0.015em}
 .brand .mark{
-  width:38px; height:38px;
+  width:40px; height:40px;
   display:grid; place-items:center;
   transition:transform .4s var(--ease-out);
-  filter:drop-shadow(0 0 10px rgba(255,122,0,.45));
+  filter:drop-shadow(0 0 10px rgba(255,122,0,.4));
 }
 .brand:hover .mark{transform:rotate(-8deg) scale(1.08)}
-.brand .mark svg{width:38px; height:38px}
+.brand .mark img{width:40px; height:40px; object-fit:contain; display:block}
 .brand small{color:var(--fg-muted); font-weight:500; font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-left:4px}
 .nav-links{display:flex; gap:2px}
 .nav-links a{
@@ -167,8 +167,48 @@ p:last-child{margin-bottom:0}
 }
 .nav-links a:hover{color:var(--fg); background:rgba(250,243,231,0.04)}
 .nav-cta{display:flex; align-items:center; gap:10px}
-@media (max-width:920px){ .nav-links{display:none} }
-@media (max-width:520px){ .nav-cta .btn-ghost{display:none} }
+
+/* Hamburger (mobile) */
+.nav-toggle{
+  display:none; width:44px; height:44px; border-radius:10px;
+  align-items:center; justify-content:center; flex-shrink:0;
+  border:1px solid var(--line-strong); background:rgba(250,243,231,0.03);
+}
+.nav-toggle span{
+  position:relative; width:20px; height:2px; background:var(--cream); border-radius:2px;
+  transition:transform .3s var(--ease), background .3s var(--ease);
+}
+.nav-toggle span::before,.nav-toggle span::after{
+  content:""; position:absolute; left:0; width:20px; height:2px; background:var(--cream); border-radius:2px;
+  transition:transform .3s var(--ease), top .3s var(--ease), bottom .3s var(--ease);
+}
+.nav-toggle span::before{top:-6px}
+.nav-toggle span::after{top:6px}
+body.menu-open .nav-toggle span{background:transparent}
+body.menu-open .nav-toggle span::before{top:0; transform:rotate(45deg)}
+body.menu-open .nav-toggle span::after{top:0; transform:rotate(-45deg)}
+
+@media (max-width:920px){
+  .nav-links{
+    position:fixed; inset:72px 0 auto 0; z-index:55;
+    flex-direction:column; gap:4px;
+    background:color-mix(in oklab,var(--bg) 96%,transparent);
+    backdrop-filter:blur(22px) saturate(160%);
+    -webkit-backdrop-filter:blur(22px) saturate(160%);
+    border-bottom:1px solid var(--line);
+    padding:14px 22px 22px;
+    transform:translateY(-12px); opacity:0; pointer-events:none;
+    transition:opacity .3s var(--ease), transform .3s var(--ease-out);
+    max-height:calc(100dvh - 72px); overflow-y:auto;
+  }
+  body.menu-open .nav-links{transform:translateY(0); opacity:1; pointer-events:auto}
+  .nav-links a{padding:14px 12px; font-size:16px; border-bottom:1px solid var(--line); border-radius:0}
+  .nav-links a:last-child{border-bottom:0}
+  .nav-toggle{display:flex}
+  .nav-cta .btn-ghost{display:none}
+  .nav-cta .btn-primary{padding:11px 16px; font-size:14px}
+}
+@media (prefers-reduced-motion: reduce){ .nav-links{transition:opacity .2s} }
 
 /* ===== HERO (centered, monkey neon backdrop) ===== */
 .hero{
@@ -195,34 +235,30 @@ p:last-child{margin-bottom:0}
 
 /* Monkey silhouette: outline neon orange, breathing glow, bigger but lower opacity for legibility */
 .monkey-bg{
-  position:absolute; top:56%; left:50%;
-  width:clamp(520px,72vw,920px); aspect-ratio:1/1;
+  position:absolute; top:54%; left:50%;
+  width:clamp(360px,46vw,560px); aspect-ratio:11/12;
   transform:translate(-50%,-50%);
   z-index:0; pointer-events:none;
-  opacity:.42;
-  filter:drop-shadow(0 0 18px rgba(255,122,0,.65)) drop-shadow(0 0 48px rgba(255,122,0,.35));
+  opacity:.4;
+  filter:drop-shadow(0 0 16px rgba(255,122,0,.6)) drop-shadow(0 0 46px rgba(255,122,0,.32));
   animation:breathe-mono 5.5s var(--ease) infinite;
 }
 .monkey-bg svg{width:100%; height:100%; overflow:visible}
 .monkey-bg .stroke{
-  fill:none; stroke:var(--orange-neon); stroke-width:4.4;
-  stroke-linecap:round; stroke-linejoin:round;
-}
-.monkey-bg .stroke-thin{
-  fill:none; stroke:var(--orange-neon); stroke-width:2.7;
+  fill:none; stroke:var(--orange-neon); stroke-width:1.3;
   stroke-linecap:round; stroke-linejoin:round;
 }
 .monkey-bg .fill{ fill:var(--orange-neon); stroke:none }
 @keyframes breathe-mono{
   0%,100%{
-    filter:drop-shadow(0 0 18px rgba(255,122,0,.65)) drop-shadow(0 0 48px rgba(255,122,0,.35));
+    filter:drop-shadow(0 0 16px rgba(255,122,0,.6)) drop-shadow(0 0 46px rgba(255,122,0,.32));
     transform:translate(-50%,-50%) scale(1);
-    opacity:.42;
+    opacity:.4;
   }
   50%{
-    filter:drop-shadow(0 0 28px rgba(255,122,0,.9)) drop-shadow(0 0 80px rgba(255,122,0,.5));
-    transform:translate(-50%,-50%) scale(1.03);
-    opacity:.52;
+    filter:drop-shadow(0 0 26px rgba(255,122,0,.85)) drop-shadow(0 0 74px rgba(255,122,0,.46));
+    transform:translate(-50%,-50%) scale(1.025);
+    opacity:.5;
   }
 }
 @media (prefers-reduced-motion: reduce){ .monkey-bg{animation:none} }
@@ -231,20 +267,8 @@ p:last-child{margin-bottom:0}
 .hero::before{
   content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
   background:
-    radial-gradient(ellipse 60% 38% at 50% 45%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 35%, transparent 70%);
+    radial-gradient(ellipse 62% 42% at 50% 42%, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.5) 38%, transparent 72%);
 }
-
-/* Subtle scanline crawl around the monkey to suggest "voltage" */
-.monkey-bg::after{
-  content:""; position:absolute; inset:0; border-radius:50%;
-  background:conic-gradient(from 0deg, transparent 0%, rgba(255,122,0,.18) 8%, transparent 16%, transparent 100%);
-  -webkit-mask:radial-gradient(circle, transparent 56%, #000 58%, #000 62%, transparent 64%);
-  mask:radial-gradient(circle, transparent 56%, #000 58%, #000 62%, transparent 64%);
-  animation:orbit 9s linear infinite;
-  pointer-events:none;
-}
-@keyframes orbit{ to{ transform:rotate(360deg) } }
-@media (prefers-reduced-motion: reduce){ .monkey-bg::after{animation:none} }
 
 /* Text gets a soft glow shield so it stays legible over the silhouette */
 .hero .display{
@@ -743,8 +767,8 @@ a:focus-visible{outline-offset:4px}
 
 /* ===== Scroll companion (real monkey follows you) ===== */
 .scroll-monkey{
-  position:fixed; right:22px; bottom:22px; z-index:90;
-  width:76px; height:76px; border-radius:50%;
+  position:fixed; right:26px; bottom:64px; z-index:90;
+  width:96px; height:96px; border-radius:50%;
   display:grid; place-items:center;
   opacity:0; transform:translateY(20px) scale(.8);
   pointer-events:none;
@@ -752,44 +776,55 @@ a:focus-visible{outline-offset:4px}
 }
 .scroll-monkey.show{opacity:1; transform:translateY(0) scale(1); pointer-events:auto}
 .scroll-monkey .ring{position:absolute; inset:0; width:100%; height:100%; transform:rotate(-90deg)}
-.scroll-monkey .ring .track{fill:none; stroke:rgba(255,122,0,.18); stroke-width:5}
+.scroll-monkey .ring .track{fill:none; stroke:rgba(255,122,0,.18); stroke-width:4.5}
 .scroll-monkey .ring .prog{
-  fill:none; stroke:var(--orange); stroke-width:5; stroke-linecap:round;
+  fill:none; stroke:var(--orange); stroke-width:4.5; stroke-linecap:round;
   stroke-dasharray:289; stroke-dashoffset:289;
   filter:drop-shadow(0 0 5px rgba(255,122,0,.7));
   transition:stroke-dashoffset .15s linear;
 }
 .scroll-monkey .face{
-  position:absolute; inset:7px; border-radius:50%; overflow:hidden;
-  box-shadow:0 8px 24px -6px rgba(255,122,0,.55), 0 0 0 1px rgba(255,122,0,.25);
+  position:absolute; inset:8px; border-radius:50%; overflow:hidden;
+  box-shadow:0 10px 30px -8px rgba(255,122,0,.6), 0 0 0 1px rgba(255,122,0,.28);
   background:#11111A;
 }
 .scroll-monkey .face img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s var(--ease)}
 .scroll-monkey:hover .face img{transform:scale(1.08)}
-.scroll-monkey .tip{
-  position:absolute; right:calc(100% + 12px); top:50%; transform:translateY(-50%) translateX(6px);
-  white-space:nowrap; background:var(--orange); color:#0A0A0F;
-  font-family:var(--font-sans); font-weight:600; font-size:13px;
-  padding:8px 14px; border-radius:999px;
-  opacity:0; pointer-events:none; transition:opacity .3s var(--ease), transform .3s var(--ease-out);
-  box-shadow:0 8px 20px -6px rgba(255,122,0,.6);
+
+/* Speech bubble that pops when the monkey appears on scroll */
+.scroll-monkey .bubble{
+  position:absolute; right:calc(100% + 16px); top:50%;
+  transform:translateY(-50%) translateX(10px) scale(.9);
+  width:max-content; max-width:210px; text-align:left;
+  background:var(--cream); color:#1a120a;
+  font-family:var(--font-sans); font-weight:600; font-size:13.5px; line-height:1.35;
+  padding:12px 16px; border-radius:16px;
+  opacity:0; pointer-events:none;
+  transition:opacity .45s var(--ease), transform .45s var(--ease-out);
+  box-shadow:0 14px 34px -10px rgba(0,0,0,.6), 0 0 0 1px rgba(255,122,0,.25);
 }
-.scroll-monkey .tip::after{
+.scroll-monkey .bubble b{color:var(--orange-deep)}
+.scroll-monkey .bubble::after{
   content:""; position:absolute; left:100%; top:50%; transform:translateY(-50%);
-  border:6px solid transparent; border-left-color:var(--orange);
+  border:8px solid transparent; border-left-color:var(--cream);
 }
-.scroll-monkey:hover .tip{opacity:1; transform:translateY(-50%) translateX(0)}
+.scroll-monkey.show .bubble{opacity:1; transform:translateY(-50%) translateX(0) scale(1); transition-delay:.5s}
+.scroll-monkey.show .bubble.hide{opacity:0; transform:translateY(-50%) translateX(10px) scale(.9); transition-delay:0s}
+.scroll-monkey:hover .bubble{opacity:1 !important; transform:translateY(-50%) translateX(0) scale(1) !important}
 .scroll-monkey .pulse-dot{
-  position:absolute; top:4px; right:4px; width:14px; height:14px; border-radius:50%;
+  position:absolute; top:6px; right:6px; width:16px; height:16px; border-radius:50%;
   background:#28c840; border:2px solid #000; z-index:3;
   box-shadow:0 0 0 0 rgba(40,200,64,.6); animation:pulse-live 2s var(--ease) infinite;
 }
 @keyframes pulse-live{
   0%{box-shadow:0 0 0 0 rgba(40,200,64,.55)}
-  70%{box-shadow:0 0 0 8px rgba(40,200,64,0)}
+  70%{box-shadow:0 0 0 9px rgba(40,200,64,0)}
   100%{box-shadow:0 0 0 0 rgba(40,200,64,0)}
 }
-@media (max-width:600px){ .scroll-monkey{width:62px; height:62px; right:16px; bottom:16px} .scroll-monkey .tip{display:none} }
+@media (max-width:600px){
+  .scroll-monkey{width:74px; height:74px; right:16px; bottom:18px}
+  .scroll-monkey .bubble{font-size:12px; max-width:160px; padding:9px 12px; right:calc(100% + 10px)}
+}
 @media (prefers-reduced-motion: reduce){ .scroll-monkey .pulse-dot{animation:none} .scroll-monkey{transition:opacity .3s} }
 
 /* ===== GOLD BANNER (recover the leak) ===== */
@@ -830,7 +865,7 @@ a:focus-visible{outline-offset:4px}
 @media (prefers-reduced-motion: reduce){ .marquee-track{animation:none; flex-wrap:nowrap; overflow-x:auto} }
 .ugc-card{
   position:relative; flex:0 0 auto;
-  width:clamp(220px,24vw,300px); aspect-ratio:4/5;
+  width:clamp(260px,30vw,380px); aspect-ratio:4/5;
   border-radius:var(--radius-lg); overflow:hidden;
   border:1px solid var(--line);
   box-shadow:var(--shadow-card);
@@ -880,6 +915,33 @@ a:focus-visible{outline-offset:4px}
 }
 section{overflow:hidden}
 
+/* ===== MOBILE POLISH (desktop untouched) ===== */
+@media (max-width:600px){
+  section{padding:clamp(52px,12vw,72px) 0}
+  .section-head{margin-bottom:32px}
+  .hero{padding:24px 0 64px}
+  .display{font-size:clamp(44px,13vw,62px)}
+  .lede{font-size:16px}
+  h2.section-title{font-size:clamp(30px,8vw,42px)}
+  /* hero stats stack cleanly, never cramped */
+  .hero-stats{gap:14px}
+  .hero-ctas .btn{width:100%; justify-content:center}
+  /* keep decorations from cluttering small screens */
+  .deco.curl{display:none}
+  .deco.banana{opacity:.3; width:clamp(48px,13vw,72px)}
+  .deco.mini-monkey{opacity:.12}
+  /* smaller monkey backdrop so headline dominates on phones */
+  .monkey-bg{width:78vw; opacity:.32}
+  /* UGC cards a touch smaller, still prominent */
+  .ugc-card{width:74vw; max-width:300px}
+  /* give the page bottom room so the fixed companion never covers the footer CTA */
+  footer{padding-bottom:96px}
+}
+@media (max-width:380px){
+  .display{font-size:46px}
+  .brand span{font-size:15px}
+}
+
 /* Noise overlay */
 body::after{
   content:""; position:fixed; inset:0; pointer-events:none; z-index:1000;
@@ -896,26 +958,11 @@ body::after{
   <div class="container nav-inner">
     <a class="brand" href="#">
       <span class="mark">
-        <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
-          <!-- copete -->
-          <path d="M37 6 C 39 10, 38 14, 33.5 15.5 C 36 12.5 36 9 34.5 6.2 Z" fill="#FF7A00"/>
-          <!-- orejas -->
-          <circle cx="13.5" cy="31" r="7.5" stroke="#FF7A00" stroke-width="4.4"/>
-          <circle cx="50.5" cy="31" r="7.5" stroke="#FF7A00" stroke-width="4.4"/>
-          <!-- cabeza -->
-          <path d="M18.5 25 C 18.5 16, 24.5 11, 32 11 C 39.5 11, 45.5 16, 45.5 25 L45.5 37 C 45.5 46.5, 39.5 52.5, 32 52.5 C 24.5 52.5, 18.5 46.5, 18.5 37 Z" stroke="#FF7A00" stroke-width="4.4" stroke-linejoin="round"/>
-          <!-- ojos -->
-          <path d="M24.5 29.5 C 26 27.2, 30 27.6, 30 31 C 28 32.4, 24.8 31.8, 24.5 29.5 Z" fill="#FF7A00"/>
-          <path d="M39.5 29.5 C 38 27.2, 34 27.6, 34 31 C 36 32.4, 39.2 31.8, 39.5 29.5 Z" fill="#FF7A00"/>
-          <!-- nariz -->
-          <path d="M29.5 37.5 L34.5 37.5" stroke="#FF7A00" stroke-width="2.6" stroke-linecap="round"/>
-          <!-- sonrisa -->
-          <path d="M25 42 C 28.5 47, 35.5 47, 39 42" stroke="#FF7A00" stroke-width="2.8" stroke-linecap="round"/>
-        </svg>
+        <img src="/img/logo-monkey.png" alt="Logo Monkey Labs AI" width="40" height="40" />
       </span>
       <span>Monkey Labs<small>AI</small></span>
     </a>
-    <nav class="nav-links" aria-label="Primary">
+    <nav class="nav-links" id="navLinks" aria-label="Primary">
       <a href="#resultados">Resultados</a>
       <a href="#voice-agents">Voice agents</a>
       <a href="#modulos">Módulos</a>
@@ -929,6 +976,7 @@ body::after{
         Agenda tu demo
         <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks"><span></span></button>
     </div>
   </div>
 </header>
@@ -941,7 +989,7 @@ body::after{
   </svg>
   <span class="pulse-dot" aria-hidden="true"></span>
   <span class="face"><img src="/img/mono-companion.jpg" alt="" loading="lazy" /></span>
-  <span class="tip">Agenda tu demo 🐵</span>
+  <span class="bubble" id="monkeyBubble">Agenda tu demo y <b>habla con un monkey</b> 🐵</span>
 </a>
 
 <!-- ====== HERO ====== -->
@@ -973,17 +1021,35 @@ body::after{
       <path d="M10 50 C 30 80, 70 20, 100 50 C 130 80, 170 20, 190 50"/>
     </g></svg>
   </div>
+  <div class="deco banana float-a" style="top:42%; left:3%; animation-delay:-2.5s" aria-hidden="true">
+    <svg viewBox="0 0 64 64"><g class="stroke" transform="rotate(60 32 32)">
+      <path d="M14 14 C 12 22, 14 38, 24 48 C 38 58, 52 52, 54 38 L 49 39 C 47 48, 38 51, 28 44 C 18 36, 16 24, 20 16 Z"/>
+      <path d="M14 14 L 18 8"/>
+    </g></svg>
+  </div>
+  <div class="deco banana float-b" style="bottom:24%; right:4%; animation-delay:-1.5s" aria-hidden="true">
+    <svg viewBox="0 0 64 64"><g class="stroke" transform="rotate(-50 32 32)">
+      <path d="M14 14 C 12 22, 14 38, 24 48 C 38 58, 52 52, 54 38 L 49 39 C 47 48, 38 51, 28 44 C 18 36, 16 24, 20 16 Z"/>
+      <path d="M14 14 L 18 8"/>
+    </g></svg>
+  </div>
 
   <div class="monkey-bg" aria-hidden="true">
-    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-      <path class="fill" d="M37 6 C 39 10, 38 14, 33.5 15.5 C 36 12.5 36 9 34.5 6.2 Z"/>
-      <circle class="stroke" cx="13.5" cy="31" r="7.5"/>
-      <circle class="stroke" cx="50.5" cy="31" r="7.5"/>
-      <path class="stroke" d="M18.5 25 C 18.5 16, 24.5 11, 32 11 C 39.5 11, 45.5 16, 45.5 25 L45.5 37 C 45.5 46.5, 39.5 52.5, 32 52.5 C 24.5 52.5, 18.5 46.5, 18.5 37 Z"/>
-      <path class="fill" d="M24.5 29.5 C 26 27.2, 30 27.6, 30 31 C 28 32.4, 24.8 31.8, 24.5 29.5 Z"/>
-      <path class="fill" d="M39.5 29.5 C 38 27.2, 34 27.6, 34 31 C 36 32.4, 39.2 31.8, 39.5 29.5 Z"/>
-      <path class="stroke-thin" d="M29.5 37.5 L34.5 37.5"/>
-      <path class="stroke-thin" d="M25 42 C 28.5 47, 35.5 47, 39 42"/>
+    <svg viewBox="0 0 110 120" xmlns="http://www.w3.org/2000/svg">
+      <g class="stroke">
+        <path d="M52 10 C 38 10, 28 20, 26 34 C 25 40, 27 45, 30 49 C 26 52, 24 58, 25 64 C 27 76, 38 84, 52 84 C 66 84, 77 76, 79 64 C 80 58, 78 52, 74 49 C 77 45, 79 40, 78 34 C 76 20, 66 10, 52 10 Z"/>
+        <path d="M40 36 C 35 42, 35 54, 40 62 C 44 68, 48 70, 52 70 C 56 70, 60 68, 64 62 C 69 54, 69 42, 64 36 C 60 32, 56 31, 52 31 C 48 31, 44 32, 40 36 Z"/>
+        <path d="M42 42 C 45 40, 48 40, 49 42.5"/>
+        <path d="M55 42.5 C 56 40, 59 40, 62 42"/>
+        <path d="M50 52.5 L50 56.5 M54 52.5 L54 56.5"/>
+        <path d="M46 62 C 49 64, 55 64, 58 62"/>
+        <path d="M41 82 C 37 90, 35 100, 36 113"/>
+        <path d="M63 82 C 67 90, 69 100, 68 113"/>
+        <path d="M43 89 C 49 93, 59 93, 65 89"/>
+        <path d="M67 104 C 84 104, 92 90, 88 78 C 86 71, 78 69, 75 75 C 73 79, 77 82, 80 79"/>
+      </g>
+      <circle class="fill" cx="45.5" cy="46.5" r="1.9"/>
+      <circle class="fill" cx="58.5" cy="46.5" r="1.9"/>
     </svg>
   </div>
 
@@ -1143,6 +1209,12 @@ body::after{
       <path d="M14 14 L 18 8"/>
     </g></svg>
   </div>
+  <div class="deco banana float-b" style="bottom:10%; right:4%; animation-delay:-3s" aria-hidden="true">
+    <svg viewBox="0 0 64 64"><g class="stroke" transform="rotate(120 32 32)">
+      <path d="M14 14 C 12 22, 14 38, 24 48 C 38 58, 52 52, 54 38 L 49 39 C 47 48, 38 51, 28 44 C 18 36, 16 24, 20 16 Z"/>
+      <path d="M14 14 L 18 8"/>
+    </g></svg>
+  </div>
   <div class="container">
     <div class="section-head fade-in">
       <span class="kicker">Pruébalo ahora</span>
@@ -1206,6 +1278,34 @@ body::after{
         Abrir demo público
         <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== UGC GALLERY ====== -->
+<section class="ugc" id="cultura">
+  <div class="container">
+    <div class="section-head fade-in">
+      <span class="kicker">La marca, viva</span>
+      <h2 class="section-title"><span class="word-cream">No somos otro</span> <span class="word-orange"><em>software más.</em></span></h2>
+      <p class="lede" style="margin:0 auto">Energía, actitud y producto real. Así es Monkey Labs por fuera del dashboard.</p>
+    </div>
+  </div>
+  <div class="marquee" aria-label="Galería de la marca Monkey Labs">
+    <div class="marquee-track">
+      <figure class="ugc-card"><img src="/img/ugc-banana.jpg" alt="Mono Monkey Labs sosteniendo una banana con la marca grabada" loading="lazy"/><figcaption class="cap">Monkey Labs AI</figcaption></figure>
+      <figure class="ugc-card"><img src="/img/ugc-kiss.jpg" alt="Mono Monkey Labs con gafas y lata de la marca" loading="lazy"/><figcaption class="cap">Spark energy</figcaption></figure>
+      <figure class="ugc-card"><img src="/img/ugc-skate.jpg" alt="Mono Monkey Labs con camiseta de la marca en el skatepark" loading="lazy"/><figcaption class="cap">Live fully</figcaption></figure>
+      <figure class="ugc-card"><img src="/img/ugc-chill.jpg" alt="Mono Monkey Labs relajado tomando la bebida" loading="lazy"/><figcaption class="cap">Good vibes</figcaption></figure>
+      <figure class="ugc-card"><img src="/img/ugc-drink.jpg" alt="Mono Monkey Labs con tenis y la bebida" loading="lazy"/><figcaption class="cap">Active lifestyle</figcaption></figure>
+      <figure class="ugc-card"><img src="/img/ugc-box.jpg" alt="Caja de bebidas Monkey Labs AI en la playa" loading="lazy"/><figcaption class="cap">12-pack</figcaption></figure>
+      <!-- duplicate for seamless loop -->
+      <figure class="ugc-card" aria-hidden="true"><img src="/img/ugc-banana.jpg" alt="" loading="lazy"/><figcaption class="cap">Monkey Labs AI</figcaption></figure>
+      <figure class="ugc-card" aria-hidden="true"><img src="/img/ugc-kiss.jpg" alt="" loading="lazy"/><figcaption class="cap">Spark energy</figcaption></figure>
+      <figure class="ugc-card" aria-hidden="true"><img src="/img/ugc-skate.jpg" alt="" loading="lazy"/><figcaption class="cap">Live fully</figcaption></figure>
+      <figure class="ugc-card" aria-hidden="true"><img src="/img/ugc-chill.jpg" alt="" loading="lazy"/><figcaption class="cap">Good vibes</figcaption></figure>
+      <figure class="ugc-card" aria-hidden="true"><img src="/img/ugc-drink.jpg" alt="" loading="lazy"/><figcaption class="cap">Active lifestyle</figcaption></figure>
+      <figure class="ugc-card" aria-hidden="true"><img src="/img/ugc-box.jpg" alt="" loading="lazy"/><figcaption class="cap">12-pack</figcaption></figure>
     </div>
   </div>
 </section>
@@ -1285,6 +1385,12 @@ body::after{
       <path d="M14 14 L 18 8"/>
     </g></svg>
   </div>
+  <div class="deco banana float-a" style="bottom:12%; right:7%; animation-delay:-2s" aria-hidden="true">
+    <svg viewBox="0 0 64 64"><g class="stroke" transform="rotate(-15 32 32)">
+      <path d="M14 14 C 12 22, 14 38, 24 48 C 38 58, 52 52, 54 38 L 49 39 C 47 48, 38 51, 28 44 C 18 36, 16 24, 20 16 Z"/>
+      <path d="M14 14 L 18 8"/>
+    </g></svg>
+  </div>
   <div class="container">
     <div class="section-head fade-in">
       <span class="kicker">Para quién es</span>
@@ -1348,34 +1454,6 @@ body::after{
         <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Análisis de churn anticipado</li>
         <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>Onboarding asistido</li>
       </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ====== UGC GALLERY ====== -->
-<section class="ugc" id="cultura">
-  <div class="container">
-    <div class="section-head fade-in">
-      <span class="kicker">La marca, viva</span>
-      <h2 class="section-title"><span class="word-cream">No somos otra</span> <span class="word-orange"><em>SaaS gris.</em></span></h2>
-      <p class="lede" style="margin:0 auto">Energía, actitud y producto real. Así se ve Monkey Labs por fuera del dashboard.</p>
-    </div>
-  </div>
-  <div class="marquee" aria-label="Galería de la marca Monkey Labs">
-    <div class="marquee-track">
-      <figure class="ugc-card"><img src="/img/ugc-banana.jpg" alt="Mono Monkey Labs sosteniendo una banana con la marca grabada" loading="lazy"/><figcaption class="cap">Monkey Labs AI</figcaption></figure>
-      <figure class="ugc-card"><img src="/img/ugc-kiss.jpg" alt="Mono Monkey Labs con gafas y lata de la marca" loading="lazy"/><figcaption class="cap">Spark energy</figcaption></figure>
-      <figure class="ugc-card"><img src="/img/ugc-skate.jpg" alt="Mono Monkey Labs con camiseta de la marca en el skatepark" loading="lazy"/><figcaption class="cap">Live fully</figcaption></figure>
-      <figure class="ugc-card"><img src="/img/ugc-chill.jpg" alt="Mono Monkey Labs relajado tomando la bebida" loading="lazy"/><figcaption class="cap">Good vibes</figcaption></figure>
-      <figure class="ugc-card"><img src="/img/ugc-drink.jpg" alt="Mono Monkey Labs con tenis y la bebida" loading="lazy"/><figcaption class="cap">Active lifestyle</figcaption></figure>
-      <figure class="ugc-card"><img src="/img/ugc-box.jpg" alt="Caja de bebidas Monkey Labs AI en la playa" loading="lazy"/><figcaption class="cap">12-pack</figcaption></figure>
-      <!-- duplicate for seamless loop -->
-      <figure class="ugc-card" aria-hidden="true"><img src="/img/ugc-banana.jpg" alt="" loading="lazy"/><figcaption class="cap">Monkey Labs AI</figcaption></figure>
-      <figure class="ugc-card" aria-hidden="true"><img src="/img/ugc-kiss.jpg" alt="" loading="lazy"/><figcaption class="cap">Spark energy</figcaption></figure>
-      <figure class="ugc-card" aria-hidden="true"><img src="/img/ugc-skate.jpg" alt="" loading="lazy"/><figcaption class="cap">Live fully</figcaption></figure>
-      <figure class="ugc-card" aria-hidden="true"><img src="/img/ugc-chill.jpg" alt="" loading="lazy"/><figcaption class="cap">Good vibes</figcaption></figure>
-      <figure class="ugc-card" aria-hidden="true"><img src="/img/ugc-drink.jpg" alt="" loading="lazy"/><figcaption class="cap">Active lifestyle</figcaption></figure>
-      <figure class="ugc-card" aria-hidden="true"><img src="/img/ugc-box.jpg" alt="" loading="lazy"/><figcaption class="cap">12-pack</figcaption></figure>
     </div>
   </div>
 </section>
@@ -1478,16 +1556,7 @@ body::after{
       <div>
         <a class="brand" href="#" style="margin-bottom:8px">
           <span class="mark">
-            <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
-              <path d="M37 6 C 39 10, 38 14, 33.5 15.5 C 36 12.5 36 9 34.5 6.2 Z" fill="#FF7A00"/>
-              <circle cx="13.5" cy="31" r="7.5" stroke="#FF7A00" stroke-width="4.4"/>
-              <circle cx="50.5" cy="31" r="7.5" stroke="#FF7A00" stroke-width="4.4"/>
-              <path d="M18.5 25 C 18.5 16, 24.5 11, 32 11 C 39.5 11, 45.5 16, 45.5 25 L45.5 37 C 45.5 46.5, 39.5 52.5, 32 52.5 C 24.5 52.5, 18.5 46.5, 18.5 37 Z" stroke="#FF7A00" stroke-width="4.4" stroke-linejoin="round"/>
-              <path d="M24.5 29.5 C 26 27.2, 30 27.6, 30 31 C 28 32.4, 24.8 31.8, 24.5 29.5 Z" fill="#FF7A00"/>
-              <path d="M39.5 29.5 C 38 27.2, 34 27.6, 34 31 C 36 32.4, 39.2 31.8, 39.5 29.5 Z" fill="#FF7A00"/>
-              <path d="M29.5 37.5 L34.5 37.5" stroke="#FF7A00" stroke-width="2.6" stroke-linecap="round"/>
-              <path d="M25 42 C 28.5 47, 35.5 47, 39 42" stroke="#FF7A00" stroke-width="2.8" stroke-linecap="round"/>
-            </svg>
+            <img src="/img/logo-monkey.png" alt="Logo Monkey Labs AI" width="40" height="40" />
           </span>
           <span>Monkey Labs<small>AI</small></span>
         </a>
@@ -1646,6 +1715,21 @@ body::after{
     }
   }
 
+  /* Mobile menu toggle */
+  (function(){
+    var toggle = document.getElementById('navToggle');
+    var links = document.getElementById('navLinks');
+    if (!toggle || !links) return;
+    function close(){ document.body.classList.remove('menu-open'); toggle.setAttribute('aria-expanded','false'); toggle.setAttribute('aria-label','Abrir menú'); }
+    function open(){ document.body.classList.add('menu-open'); toggle.setAttribute('aria-expanded','true'); toggle.setAttribute('aria-label','Cerrar menú'); }
+    toggle.addEventListener('click', function(){
+      if (document.body.classList.contains('menu-open')) close(); else open();
+    });
+    links.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', close); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+    window.addEventListener('resize', function(){ if (window.innerWidth > 920) close(); });
+  })();
+
   /* Smooth anchor with nav offset */
   document.querySelectorAll('a[href^="#"]').forEach(function(a){
     a.addEventListener('click', function(e){
@@ -1659,15 +1743,16 @@ body::after{
     });
   });
 
-  /* Scroll companion: progress ring + show after hero + tiny follow tilt */
+  /* Scroll companion: progress ring + show after hero + bubble + tiny follow tilt */
   (function(){
     var monkey = document.getElementById('scrollMonkey');
     var ring = document.getElementById('scrollRing');
+    var bubble = document.getElementById('monkeyBubble');
     if (!monkey || !ring) return;
     var CIRC = 2 * Math.PI * 46; // r=46
     ring.style.strokeDasharray = CIRC;
     var hero = document.querySelector('.hero');
-    var lastY = window.pageYOffset, ticking = false;
+    var lastY = window.pageYOffset, ticking = false, wasShown = false, hideTimer = null;
 
     function update(){
       var st = window.pageYOffset || document.documentElement.scrollTop;
@@ -1676,8 +1761,21 @@ body::after{
       ring.style.strokeDashoffset = CIRC * (1 - pct);
 
       var heroH = hero ? hero.offsetHeight * 0.6 : 400;
-      if (st > heroH) monkey.classList.add('show');
-      else monkey.classList.remove('show');
+      var show = st > heroH;
+      if (show && !wasShown){
+        monkey.classList.add('show');
+        wasShown = true;
+        // bubble appears, then auto-hides after a few seconds (hover re-shows)
+        if (bubble){
+          bubble.classList.remove('hide');
+          clearTimeout(hideTimer);
+          hideTimer = setTimeout(function(){ bubble.classList.add('hide'); }, 5200);
+        }
+      } else if (!show && wasShown){
+        monkey.classList.remove('show');
+        wasShown = false;
+        if (bubble){ bubble.classList.remove('hide'); clearTimeout(hideTimer); }
+      }
 
       if (!reduceMotion){
         var dir = st - lastY;
