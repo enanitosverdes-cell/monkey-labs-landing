@@ -35,7 +35,7 @@
   "description":"Plataforma SaaS unificada para operación 24/7 con IA.",
   "founder":[
     {"@type":"Person","name":"Nicolás Carreño","jobTitle":"Cofundador · Producto, tecnología y comercial"},
-    {"@type":"Person","name":"José Illich","jobTitle":"Cofundador"}
+    {"@type":"Person","name":"José Illidge","jobTitle":"Cofundador"}
   ],
   "areaServed":["CO","US","CA"]
 }
@@ -465,26 +465,67 @@ section{position:relative; padding:clamp(72px,9vw,140px) 0}
 .who-line em{color:var(--orange); font-style:normal}
 
 .founders{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
-.founders-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px}
+.founders-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:24px}
 @media (max-width:740px){ .founders-grid{grid-template-columns:1fr} }
 .founder{
-  padding:28px; border:1px solid var(--line); border-radius:var(--radius-lg);
-  background:var(--surface); display:flex; gap:18px; align-items:flex-start;
+  padding:36px clamp(28px,3vw,40px); border:1px solid var(--line); border-radius:var(--radius-xl);
+  background:linear-gradient(180deg,var(--surface),var(--surface-2));
+  display:flex; flex-direction:column; align-items:center; text-align:center; gap:22px;
+  transition:border-color .4s var(--ease), transform .4s var(--ease);
+  position:relative; overflow:hidden;
 }
-.founder .avatar{
-  width:56px; height:56px; border-radius:14px;
+.founder::before{
+  content:""; position:absolute; inset:auto -30% -60% -30%; height:80%;
+  background:radial-gradient(60% 60% at 50% 100%, rgba(255,122,0,0.14), transparent 70%);
+  opacity:0; transition:opacity .5s var(--ease); pointer-events:none;
+}
+.founder:hover{border-color:var(--line-strong); transform:translateY(-3px)}
+.founder:hover::before{opacity:1}
+.founder .portrait{
+  position:relative; width:clamp(180px,18vw,220px); aspect-ratio:1/1; border-radius:50%;
+  overflow:hidden; flex-shrink:0;
   background:linear-gradient(135deg,var(--orange),var(--orange-deep));
-  display:grid; place-items:center;
-  font-family:var(--font-display); font-size:24px; color:#0A0A0F;
-  flex-shrink:0; box-shadow:0 8px 22px -8px rgba(255,122,0,.5);
+  padding:3px;
+  box-shadow:
+    0 0 0 1px rgba(255,122,0,0.3),
+    0 24px 50px -16px rgba(255,122,0,.45),
+    0 12px 24px -10px rgba(0,0,0,.5);
+  transition:transform .6s var(--ease-out), box-shadow .6s var(--ease-out);
 }
-.founder h3{font-size:18px; color:var(--cream); margin-bottom:4px}
+.founder .portrait::before{
+  content:""; position:absolute; inset:-2px; border-radius:50%; padding:2px;
+  background:conic-gradient(from 180deg, var(--orange), var(--orange-deep), var(--orange-soft), var(--orange));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  animation:spin 14s linear infinite;
+}
+@keyframes spin{ to{ transform:rotate(360deg) } }
+@media (prefers-reduced-motion: reduce){ .founder .portrait::before{animation:none} }
+.founder .portrait img{
+  width:100%; height:100%; border-radius:50%; object-fit:cover;
+  display:block; filter:saturate(1.05);
+  transition:transform .8s var(--ease-out), filter .5s var(--ease);
+}
+.founder:hover .portrait{
+  transform:translateY(-4px) scale(1.02);
+  box-shadow:
+    0 0 0 1px rgba(255,122,0,0.5),
+    0 32px 64px -16px rgba(255,122,0,.6),
+    0 14px 28px -10px rgba(0,0,0,.6);
+}
+.founder:hover .portrait img{ transform:scale(1.05); filter:saturate(1.15) }
+.founder .portrait::after{
+  content:""; position:absolute; inset:3px; border-radius:50%;
+  background:radial-gradient(60% 40% at 50% 0%, rgba(250,243,231,0.14), transparent 60%);
+  pointer-events:none;
+}
+.founder h3{font-size:22px; color:var(--cream); margin-bottom:4px}
 .founder .role{
   font-family:var(--font-mono); font-size:11px; letter-spacing:.14em;
-  text-transform:uppercase; color:var(--orange); margin-bottom:12px;
+  text-transform:uppercase; color:var(--orange); margin-bottom:14px;
 }
-.founder p{font-size:14px; color:var(--fg-soft); line-height:1.55; margin-bottom:10px}
-.founder .links{display:flex; gap:14px; font-size:13px}
+.founder p{font-size:14.5px; color:var(--fg-soft); line-height:1.6; margin-bottom:14px; max-width:46ch}
+.founder .links{display:flex; gap:14px; font-size:13px; justify-content:center; flex-wrap:wrap}
 .founder .links a{color:var(--fg-muted); text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--line-strong)}
 .founder .links a:hover{color:var(--orange); text-decoration-color:var(--orange)}
 
@@ -589,7 +630,7 @@ body::after{
     </nav>
     <div class="nav-cta">
       <a class="btn btn-ghost" href="https://app.monkeylabsai.com" target="_blank" rel="noopener">Ver demo</a>
-      <a class="btn btn-primary" href="#cta">
+      <a class="btn btn-primary" href="https://wa.me/573057582101?text=Hola%2C%20vengo%20de%20monkeylabsai.com%20y%20me%20interesa%20agendar%20una%20demo%20de%20la%20plataforma%20para%20mi%20empresa." target="_blank" rel="noopener">
         Agenda tu demo
         <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
@@ -612,7 +653,7 @@ body::after{
         en lugar de seis herramientas desconectadas donde se pierde el dinero.
       </p>
       <div class="hero-ctas">
-        <a class="btn btn-primary btn-lg" href="#cta" data-magnetic>
+        <a class="btn btn-primary btn-lg" href="https://wa.me/573057582101?text=Hola%2C%20vengo%20de%20monkeylabsai.com%20y%20me%20interesa%20agendar%20una%20demo%20de%20la%20plataforma%20para%20mi%20empresa." target="_blank" rel="noopener" data-magnetic>
           Agenda tu demo
           <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
@@ -940,7 +981,9 @@ body::after{
     </div>
     <div class="founders-grid">
       <article class="founder fade-in">
-        <div class="avatar">N</div>
+        <div class="portrait">
+          <img src="/img/nicolas.jpg" alt="Retrato de Nicolás Carreño, cofundador de Monkey Labs AI" loading="lazy" width="220" height="220" />
+        </div>
         <div>
           <h3>Nicolás Carreño</h3>
           <div class="role">Cofundador · Producto, tecnología y comercial</div>
@@ -949,9 +992,11 @@ body::after{
         </div>
       </article>
       <article class="founder fade-in">
-        <div class="avatar">J</div>
+        <div class="portrait">
+          <img src="/img/jose.jpg" alt="Retrato de José Illidge, cofundador de Monkey Labs AI" loading="lazy" width="220" height="220" />
+        </div>
         <div>
-          <h3>José Illich</h3>
+          <h3>José Illidge</h3>
           <div class="role">Cofundador</div>
           <p>Socio cofundador con foco en operación y crecimiento. Trabaja codo a codo con Nicolás en producto y expansión a Estados Unidos y Canadá.</p>
           <div class="links"><a href="mailto:jose@monkeylabsai.com">jose@monkeylabsai.com</a></div>
@@ -1000,7 +1045,7 @@ body::after{
       <h2 class="section-title" style="margin-top:6px">Setup a la medida +<br/><em>mantenimiento mensual.</em></h2>
       <p class="lede" style="margin:18px auto 0">Cada empresa tiene una operación distinta. Diseñamos el plan exacto contigo en la demo, con tus números reales — sin paquetes de talla única y sin tablas inventadas.</p>
       <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-top:30px">
-        <a class="btn btn-primary btn-lg" href="#cta" data-magnetic>
+        <a class="btn btn-primary btn-lg" href="https://wa.me/573057582101?text=Hola%2C%20vengo%20de%20monkeylabsai.com%20y%20me%20interesa%20agendar%20una%20demo%20de%20la%20plataforma%20para%20mi%20empresa." target="_blank" rel="noopener" data-magnetic>
           Diseña tu plan en la demo
           <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
@@ -1021,7 +1066,7 @@ body::after{
       <h2 class="section-title">Mira cuánto está<br/><em>fugando tu operación hoy.</em></h2>
       <p class="lede" style="margin:14px auto 0; max-width:48ch">30 minutos. Sin slides genéricos — abrimos la plataforma con datos de tu nicho y salimos con un número concreto.</p>
       <div class="ctas">
-        <a class="btn btn-primary btn-lg" href="mailto:nicolas@monkeylabsai.com?subject=Demo%20Monkey%20Labs%20AI&body=Hola%20Nicol%C3%A1s%2C%20quiero%20agendar%20una%20demo." data-magnetic>
+        <a class="btn btn-primary btn-lg" href="https://wa.me/573057582101?text=Hola%2C%20vengo%20de%20monkeylabsai.com%20y%20me%20interesa%20agendar%20una%20demo%20de%20la%20plataforma%20para%20mi%20empresa." target="_blank" rel="noopener" data-magnetic>
           Agenda tu demo
           <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
@@ -1030,7 +1075,7 @@ body::after{
           Probar el demo primero
         </a>
       </div>
-      <p class="micro">Responden los fundadores · Colombia · Estados Unidos · Canadá</p>
+      <p class="micro">Responde un fundador directo por WhatsApp · +57 305 758 2101</p>
     </div>
   </div>
 </section>
@@ -1067,6 +1112,7 @@ body::after{
         <ul>
           <li><a href="#fundadores">Fundadores</a></li>
           <li><a href="#para-quien">Para quién es</a></li>
+          <li><a href="https://wa.me/573057582101" target="_blank" rel="noopener">WhatsApp · +57 305 758 2101</a></li>
           <li><a href="mailto:hola@monkeylabsai.com">hola@monkeylabsai.com</a></li>
         </ul>
       </div>
