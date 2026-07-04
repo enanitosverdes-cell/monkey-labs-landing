@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monkey Labs · La infraestructura de IA de tu empresa</title>
+<meta name="description" content="Moldeamos la infraestructura de inteligencia artificial a tu empresa: ventas automatizadas en todos tus canales, causación inteligente de facturas, CRM 360 a la medida y trazabilidad en vivo. Plan Empresarial. Pruébalo gratis.">
+<meta property="og:title" content="Monkey Labs · La infraestructura de IA de tu empresa">
+<meta property="og:description" content="Ventas, contabilidad, trazabilidad y dirección operando solas, 24/7. Moldeada a tu empresa.">
+<meta property="og:image" content="https://monkeylabsai.com/img/logo-monkey.png">
+<meta property="og:url" content="https://monkeylabsai.com/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="img/logo-monkey.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000000; --bg-2:#06060A;
+  --surface:#0E0E14; --surface-2:#13131C;
+  --fg:#FAF3E7; --fg-soft:rgba(250,243,231,.78); --fg-muted:rgba(250,243,231,.56); --fg-quiet:rgba(250,243,231,.38);
+  --line:rgba(250,243,231,.08); --line-strong:rgba(250,243,231,.18);
+  --orange:#FF7A00; --orange-deep:#E86600; --orange-neon:#FF9433; --orange-soft:#FFB266;
+  --orange-glow:rgba(255,122,0,.55);
+  --cream:#FAF3E7;
+  --green:#38D39F;
+  --font-display:"Instrument Serif","Times New Roman",serif;
+  --font-sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --max:1180px;
+  --radius:14px; --radius-lg:22px; --radius-xl:28px;
+  --ease:cubic-bezier(.2,.7,.2,1); --ease-out:cubic-bezier(.16,1,.3,1);
+  --shadow-cta:0 1px 0 rgba(255,255,255,.18) inset, 0 18px 50px -12px rgba(255,122,0,.6), 0 4px 14px rgba(255,122,0,.2);
+  --shadow-card:0 1px 0 rgba(255,255,255,.04) inset, 0 30px 60px -30px rgba(0,0,0,.7);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--orange);color:#000}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+.kick{font-family:var(--font-mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--orange);font-weight:600}
+.serif{font-family:var(--font-display)}
+h2.sec-t{font-family:var(--font-display);font-weight:400;font-size:clamp(2rem,4.6vw,3.4rem);line-height:1.05;letter-spacing:-.01em;margin:14px 0 12px}
+h2.sec-t em{font-style:italic;color:var(--orange)}
+.sec-sub{color:var(--fg-muted);font-size:1.06rem;max-width:640px}
+section{position:relative}
+
+/* ============ NAV ============ */
+.nav{position:fixed;inset:0 0 auto 0;z-index:100;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(0,0,0,.6);border-bottom:1px solid var(--line)}
+.nav-in{max-width:var(--max);margin:0 auto;padding:0 24px;height:66px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em}
+.nav-logo img{width:34px;height:34px;border-radius:9px}
+.nav-logo span b{color:var(--orange)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-size:.92rem;color:var(--fg-muted);transition:color .2s}
+.nav-links a:hover{color:var(--fg)}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:700;border-radius:999px;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .2s;cursor:pointer;white-space:nowrap}
+.btn-primary{background:linear-gradient(180deg,var(--orange-neon),var(--orange-deep));color:#140a00;padding:13px 26px;font-size:.98rem;box-shadow:var(--shadow-cta)}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-ghost{border:1px solid var(--line-strong);color:var(--fg-soft);padding:12px 24px;font-size:.95rem}
+.btn-ghost:hover{border-color:var(--orange);color:var(--fg)}
+.btn-sm{padding:9px 20px;font-size:.88rem}
+
+/* ============ HERO ============ */
+.hero{padding:158px 0 60px;position:relative;overflow:hidden}
+.hero-mesh{position:absolute;inset:-20% -10%;background:
+  radial-gradient(42% 34% at 78% 18%, rgba(255,122,0,.13), transparent 60%),
+  radial-gradient(36% 30% at 12% 80%, rgba(255,122,0,.07), transparent 60%);
+  pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(60% 55% at 50% 30%,#000 20%,transparent 75%);-webkit-mask-image:radial-gradient(60% 55% at 50% 30%,#000 20%,transparent 75%);opacity:.5;pointer-events:none}
+.hero-in{position:relative;text-align:center;max-width:960px;margin:0 auto;padding:0 24px}
+.hero-badge{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line-strong);border-radius:999px;padding:7px 16px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-soft);background:rgba(255,255,255,.02)}
+.hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.4}}
+.hero h1{font-family:var(--font-display);font-weight:400;font-size:clamp(2.7rem,7vw,5.4rem);line-height:1.02;letter-spacing:-.015em;margin:26px 0 10px}
+.hero h1 .it{font-style:italic;color:var(--orange)}
+.hero-rotator{font-family:var(--font-display);font-weight:400;font-size:clamp(2rem,5vw,3.6rem);line-height:1.1;height:1.25em;overflow:hidden;display:flex;justify-content:center;margin-bottom:26px}
+.rot-list{display:flex;flex-direction:column;align-items:center;animation:rot 12s infinite var(--ease)}
+.rot-item{height:1.25em;display:flex;align-items:center;gap:14px;white-space:nowrap}
+.rot-item svg{width:.9em;height:.9em;flex:none}
+@keyframes rot{
+  0%,14%{transform:translateY(0)}
+  16.6%,30.9%{transform:translateY(-1.25em)}
+  33.2%,47.5%{transform:translateY(-2.5em)}
+  49.8%,64.1%{transform:translateY(-3.75em)}
+  66.4%,80.7%{transform:translateY(-5em)}
+  83%,97.3%{transform:translateY(-6.25em)}
+  100%{transform:translateY(-7.5em)}
+}
+.hero-sub{color:var(--fg-muted);font-size:clamp(1.02rem,1.5vw,1.2rem);max-width:660px;margin:0 auto 34px;line-height:1.65}
+.hero-sub b{color:var(--fg-soft);font-weight:600}
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+.hero-note{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.08em;color:var(--fg-quiet)}
+.hero-note b{color:var(--fg-muted);font-weight:500}
+.trust-chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+.tchip{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-quiet);border:1px solid var(--line);border-radius:999px;padding:7px 14px;background:rgba(255,255,255,.015)}
+
+/* ============ FAQ ============ */
+.faq{padding:20px 0 110px}
+.faq-list{max-width:780px;margin:40px auto 0}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-item summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:22px 4px;font-weight:600;font-size:1.05rem;color:var(--fg-soft);transition:color .2s}
+.faq-item summary:hover{color:var(--fg)}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary .pm{font-family:var(--font-mono);color:var(--orange);font-size:1.2rem;flex:none;transition:transform .3s var(--ease)}
+.faq-item[open] summary .pm{transform:rotate(45deg)}
+.faq-item .fa{color:var(--fg-muted);font-size:.96rem;line-height:1.65;padding:0 4px 24px;max-width:640px}
+.faq-item .fa b{color:var(--fg-soft)}
+
+/* ============ CHANNEL MARQUEE ============ */
+.channels{padding:54px 0 10px}
+.marquee{overflow:hidden;position:relative;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marquee-track{display:flex;gap:14px;width:max-content;animation:marq 36s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes marq{to{transform:translateX(-50%)}}
+.chip{display:flex;align-items:center;gap:11px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:13px 24px;font-weight:600;font-size:.97rem;color:var(--fg-soft);flex:none}
+.chip svg{width:21px;height:21px;flex:none}
+.chip small{font-family:var(--font-mono);font-size:10px;color:var(--fg-quiet);letter-spacing:.1em;text-transform:uppercase;font-weight:400}
+
+/* ============ STATS ============ */
+.stats{padding:70px 0 8px}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden}
+.stat{background:var(--bg-2);padding:30px 26px;text-align:center}
+.stat .n{font-family:var(--font-display);font-size:clamp(1.9rem,3.4vw,2.8rem);line-height:1;color:var(--fg)}
+.stat .n em{color:var(--orange);font-style:normal}
+.stat .l{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-quiet);margin-top:10px}
+
+/* ============ MODULES ============ */
+.modules{padding:110px 0 40px}
+.mod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+.mod{border:1px solid var(--line);border-radius:var(--radius-lg);background:linear-gradient(180deg,var(--surface),var(--bg-2));padding:30px 26px;box-shadow:var(--shadow-card);transition:border-color .3s,transform .3s var(--ease);position:relative;overflow:hidden}
+.mod:hover{border-color:rgba(255,122,0,.4);transform:translateY(-4px)}
+.mod .mod-n{font-family:var(--font-mono);font-size:11px;color:var(--orange);letter-spacing:.2em;font-weight:600}
+.mod .ico{width:46px;height:46px;border-radius:13px;background:rgba(255,122,0,.09);border:1px solid rgba(255,122,0,.22);display:flex;align-items:center;justify-content:center;margin:18px 0 16px}
+.mod .ico svg{width:22px;height:22px;stroke:var(--orange);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.mod h3{font-size:1.16rem;font-weight:700;letter-spacing:-.01em;margin-bottom:8px}
+.mod p{color:var(--fg-muted);font-size:.94rem;line-height:1.6}
+.mod .tag{position:absolute;top:24px;right:22px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);border:1px solid rgba(56,211,159,.3);border-radius:999px;padding:4px 10px;background:rgba(56,211,159,.06)}
+
+/* ============ OPS CENTER SHOWCASE ============ */
+.ops{padding:110px 0}
+.ops-frame{margin-top:46px;border:1px solid var(--line-strong);border-radius:var(--radius-xl);background:var(--bg-2);overflow:hidden;box-shadow:0 60px 120px -50px rgba(0,0,0,.9),0 0 90px -30px rgba(255,122,0,.14)}
+.ops-bar{display:flex;align-items:center;gap:8px;padding:14px 20px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.015)}
+.ops-bar .d{width:11px;height:11px;border-radius:50%}
+.ops-bar .url{margin-left:14px;font-family:var(--font-mono);font-size:11.5px;color:var(--fg-quiet);letter-spacing:.04em}
+.ops-body{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:14px;padding:26px}
+.ops-card{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:20px}
+.ops-card .k{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-quiet)}
+.ops-money{grid-row:span 2;display:flex;flex-direction:column;justify-content:center}
+.ops-money .big{font-family:var(--font-display);font-size:clamp(2rem,4vw,3.2rem);line-height:1.05;margin-top:10px}
+.ops-money .big span{color:var(--green)}
+.ops-money .sub{color:var(--fg-quiet);font-size:.82rem;margin-top:8px}
+.bar-row{display:flex;align-items:center;gap:10px;margin-top:12px}
+.bar-row .bl{font-size:.78rem;color:var(--fg-muted);width:74px;flex:none}
+.bar-row .bar{height:8px;border-radius:99px;background:rgba(250,243,231,.07);flex:1;overflow:hidden}
+.bar-row .fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--orange-deep),var(--orange-neon))}
+.bar-row .bv{font-family:var(--font-mono);font-size:.74rem;color:var(--fg-soft);width:52px;text-align:right;flex:none}
+.ops-chat{font-size:.84rem}
+.ops-chat .q{background:rgba(255,122,0,.1);border:1px solid rgba(255,122,0,.25);border-radius:12px 12px 3px 12px;padding:9px 13px;margin:12px 0 8px;color:var(--fg-soft)}
+.ops-chat .a{background:rgba(250,243,231,.05);border:1px solid var(--line);border-radius:12px 12px 12px 3px;padding:9px 13px;color:var(--fg-muted);font-size:.82rem}
+.ops-chat .a b{color:var(--green)}
+.ops-foot{padding:0 26px 26px;display:flex;gap:20px;flex-wrap:wrap}
+.ops-pill{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-quiet)}
+.ops-pill .dd{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
+
+/* ============ INTEGRATIONS ============ */
+.integrations{padding:80px 0 30px}
+.int-marquee .chip{font-family:var(--font-mono);font-weight:500;font-size:.9rem;letter-spacing:.02em;padding:12px 24px;color:var(--fg-muted)}
+.int-marquee .chip:hover{color:var(--fg)}
+.int-marquee .chip .sq{width:9px;height:9px;border-radius:3px;background:var(--orange);opacity:.8;flex:none}
+.int-note{text-align:center;color:var(--fg-quiet);font-size:.9rem;margin-top:26px}
+.int-note b{color:var(--fg-muted);font-weight:600}
+
+/* ============ PLAN ============ */
+.plan{padding:110px 0}
+.plan-card{margin-top:46px;border-radius:var(--radius-xl);position:relative;background:
+  linear-gradient(var(--bg-2),var(--bg-2)) padding-box,
+  linear-gradient(135deg,rgba(255,122,0,.7),rgba(255,122,0,.08) 40%,rgba(255,122,0,.5)) border-box;
+  border:1.5px solid transparent;overflow:hidden}
+.plan-card::before{content:"";position:absolute;top:-40%;right:-20%;width:70%;height:120%;background:radial-gradient(closest-side,rgba(255,122,0,.14),transparent);pointer-events:none}
+.plan-in{display:grid;grid-template-columns:1.05fr 1.4fr;gap:40px;padding:52px}
+.plan-left .pl-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#140a00;font-weight:600;background:linear-gradient(180deg,var(--orange-neon),var(--orange-deep));padding:7px 14px;border-radius:999px}
+.plan-left h3{font-family:var(--font-display);font-weight:400;font-size:clamp(2.4rem,4.5vw,3.6rem);line-height:1.03;margin:20px 0 14px}
+.plan-left h3 em{font-style:italic;color:var(--orange)}
+.plan-left p{color:var(--fg-muted);font-size:1rem;line-height:1.65;margin-bottom:26px}
+.plan-left p b{color:var(--fg-soft)}
+.plan-price{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--fg-quiet);text-transform:uppercase;margin-bottom:22px}
+.plan-price b{color:var(--fg);font-size:14px}
+.plan-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.plan-list{display:grid;grid-template-columns:1fr 1fr;gap:6px 22px;align-content:center}
+.pli{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line);font-size:.93rem;color:var(--fg-soft)}
+.pli:nth-last-child(-n+2){border-bottom:0}
+.pli svg{width:17px;height:17px;flex:none;margin-top:3px}
+.pli small{display:block;color:var(--fg-quiet);font-size:.8rem;line-height:1.45}
+
+/* ============ PROCESS ============ */
+.process{padding:60px 0 110px}
+.proc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px;counter-reset:p}
+.proc{border-top:1px solid var(--line-strong);padding-top:24px;position:relative}
+.proc .pn{font-family:var(--font-mono);font-size:12px;color:var(--orange);letter-spacing:.2em;font-weight:600}
+.proc h3{font-family:var(--font-display);font-weight:400;font-size:1.7rem;margin:12px 0 8px}
+.proc p{color:var(--fg-muted);font-size:.94rem}
+.proc .pt{font-family:var(--font-mono);font-size:10.5px;color:var(--fg-quiet);letter-spacing:.12em;text-transform:uppercase;margin-top:14px}
+
+/* ============ FINAL CTA ============ */
+.final{padding:120px 0 130px;text-align:center;position:relative;overflow:hidden}
+.final-mesh{position:absolute;inset:0;background:radial-gradient(50% 60% at 50% 100%, rgba(255,122,0,.15), transparent 70%);pointer-events:none}
+.final h2{font-family:var(--font-display);font-weight:400;font-size:clamp(2.6rem,6.5vw,4.8rem);line-height:1.03;letter-spacing:-.015em;margin-bottom:16px}
+.final h2 em{font-style:italic;color:var(--orange)}
+.final p{color:var(--fg-muted);max-width:560px;margin:0 auto 36px;font-size:1.08rem}
+.final .hero-note{margin-top:18px;display:block}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid var(--line);padding:44px 0}
+.foot-in{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.foot-l{display:flex;align-items:center;gap:12px;color:var(--fg-muted);font-size:.9rem}
+.foot-l img{width:30px;height:30px;border-radius:8px}
+.foot-r{display:flex;gap:24px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.06em;color:var(--fg-quiet)}
+.foot-r a:hover{color:var(--orange)}
+
+/* ============ REVEAL ============ */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out)}
+.rv.on{opacity:1;transform:none}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:960px){
+  .mod-grid{grid-template-columns:1fr 1fr}
+  .ops-body{grid-template-columns:1fr 1fr}
+  .ops-money{grid-row:auto;grid-column:span 2}
+  .plan-in{grid-template-columns:1fr;padding:36px 28px}
+  .plan-list{margin-top:8px}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .proc-grid{grid-template-columns:1fr}
+  .nav-links a:not(.btn){display:none}
+}
+@media(max-width:640px){
+  .mod-grid{grid-template-columns:1fr}
+  .ops-body{grid-template-columns:1fr}
+  .ops-money{grid-column:auto}
+  .plan-list{grid-template-columns:1fr}
+  .pli:nth-last-child(-n+2){border-bottom:1px solid var(--line)}
+  .hero{padding-top:130px}
+}
+@media(prefers-reduced-motion:reduce){
+  .marquee-track,.rot-list{animation:none}
+  .rv{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="nav-in">
+    <a class="nav-logo" href="#"><img src="img/logo-monkey.png" alt="Monkey Labs"><span>Monkey<b>Labs</b></span></a>
+    <div class="nav-links">
+      <a href="#modulos">Plataforma</a>
+      <a href="#operaciones">Centro de Operaciones</a>
+      <a href="#integraciones">Integraciones</a>
+      <a href="#empresarial">Plan Empresarial</a>
+      <a class="btn btn-primary btn-sm" href="https://wa.me/573057582101?text=Hola%2C%20quiero%20probar%20Monkey%20Labs%20gratis" target="_blank" rel="noopener">Pruébalo gratis</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-mesh" aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-in">
+    <span class="hero-badge"><span class="dot"></span> Infraestructura de IA empresarial</span>
+    <h1>La infraestructura de IA<br>que <span class="it">opera</span> tu empresa</h1>
+    <div class="hero-rotator" aria-label="WhatsApp, Instagram, Messenger, TikTok, Telegram, tu página web">
+      <div class="rot-list" aria-hidden="true">
+        <div class="rot-item"><svg viewBox="0 0 24 24"><path fill="#25D366" d="M12 2a10 10 0 0 0-8.66 15L2 22l5.16-1.35A10 10 0 1 0 12 2Zm5.5 14.2c-.24.66-1.36 1.26-1.9 1.3-.5.05-1.1.24-3.72-.77-3.14-1.24-5.14-4.44-5.3-4.65-.15-.2-1.26-1.68-1.26-3.2 0-1.53.8-2.28 1.1-2.6.28-.3.62-.37.83-.37h.6c.2 0 .45-.04.7.53.25.6.86 2.1.94 2.25.07.15.12.33.02.53-.4.8-.83.92-.61 1.3.8 1.37 1.79 2.46 3.14 3.06.34.15.54.13.74-.1.2-.22.85-1 1.08-1.34.23-.35.46-.28.77-.17.31.12 1.98.94 2.32 1.1.34.18.57.26.65.4.08.14.08.8-.16 1.46Z"/></svg><span style="color:#25D366">WhatsApp</span></div>
+        <div class="rot-item"><svg viewBox="0 0 24 24"><defs><linearGradient id="ig" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FD5"/><stop offset=".5" stop-color="#FF543E"/><stop offset="1" stop-color="#C837AB"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#ig)"/><circle cx="12" cy="12" r="4.6" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="17.4" cy="6.6" r="1.3" fill="#fff"/></svg><span style="color:#E1478D">Instagram</span></div>
+        <div class="rot-item"><svg viewBox="0 0 24 24"><path fill="#0084FF" d="M12 2C6.5 2 2 6.14 2 11.25c0 2.9 1.45 5.5 3.72 7.2V22l3.4-1.87c.91.25 1.87.39 2.88.39 5.5 0 10-4.14 10-9.26C22 6.14 17.5 2 12 2Zm1 12.46-2.55-2.72-4.98 2.72 5.48-5.82 2.61 2.72 4.92-2.72L13 14.46Z"/></svg><span style="color:#3D9BFF">Messenger</span></div>
+        <div class="rot-item"><svg viewBox="0 0 24 24"><path fill="#FAF3E7" d="M16.6 3c.36 1.97 1.68 3.5 3.9 3.86v3.05c-1.53.06-2.87-.4-3.94-1.16v6.86A6.13 6.13 0 1 1 10.4 9.5c.35 0 .7.03 1.03.1v3.13a3.06 3.06 0 1 0 2.14 2.92V3h3.03Z"/><path fill="#25F4EE" d="M15.57 3h1.03c.36 1.97 1.68 3.5 3.9 3.86v1.02c-1.9-.2-3.6-1.2-4.55-2.72A6.9 6.9 0 0 1 15.57 3Z" opacity=".8"/><path fill="#FE2C55" d="M11.43 10.62v1.05a3.06 3.06 0 0 0-1.9 5.6 3.06 3.06 0 0 1 2.9-5.63c-.32-.06-.66-.1-1-.02Z" opacity=".8"/></svg><span style="color:#FAF3E7">TikTok</span></div>
+        <div class="rot-item"><svg viewBox="0 0 24 24"><path fill="#2AABEE" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.9 6.6-1.68 7.9c-.12.56-.45.7-.92.43l-2.55-1.88-1.23 1.18c-.14.14-.25.25-.5.25l.18-2.57 4.67-4.22c.2-.18-.05-.28-.31-.1l-5.78 3.64-2.49-.78c-.54-.17-.55-.54.11-.8l9.72-3.74c.45-.17.85.1.7.69Z"/></svg><span style="color:#4FB8F0">Telegram</span></div>
+        <div class="rot-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="#FF7A00" stroke-width="1.8"/><path d="M2.5 12h19M12 2.5c2.6 2.4 4 5.7 4 9.5s-1.4 7.1-4 9.5c-2.6-2.4-4-5.7-4-9.5s1.4-7.1 4-9.5Z" fill="none" stroke="#FF7A00" stroke-width="1.6"/></svg><span style="color:var(--orange)">tu página web</span></div>
+        <!-- duplicado del primero para el loop perfecto -->
+        <div class="rot-item"><svg viewBox="0 0 24 24"><path fill="#25D366" d="M12 2a10 10 0 0 0-8.66 15L2 22l5.16-1.35A10 10 0 1 0 12 2Zm5.5 14.2c-.24.66-1.36 1.26-1.9 1.3-.5.05-1.1.24-3.72-.77-3.14-1.24-5.14-4.44-5.3-4.65-.15-.2-1.26-1.68-1.26-3.2 0-1.53.8-2.28 1.1-2.6.28-.3.62-.37.83-.37h.6c.2 0 .45-.04.7.53.25.6.86 2.1.94 2.25.07.15.12.33.02.53-.4.8-.83.92-.61 1.3.8 1.37 1.79 2.46 3.14 3.06.34.15.54.13.74-.1.2-.22.85-1 1.08-1.34.23-.35.46-.28.77-.17.31.12 1.98.94 2.32 1.1.34.18.57.26.65.4.08.14.08.8-.16 1.46Z"/></svg><span style="color:#25D366">WhatsApp</span></div>
+      </div>
+    </div>
+    <p class="hero-sub">No vendemos software genérico. <b>Moldeamos la infraestructura a tu operación:</b> ventas, facturación, contabilidad y trazabilidad trabajando solas, 24/7, conectadas en un solo cerebro.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="https://wa.me/573057582101?text=Hola%2C%20quiero%20probar%20Monkey%20Labs%20gratis" target="_blank" rel="noopener">Pruébalo gratis
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="btn btn-ghost" href="https://app.monkeylabsai.com" target="_blank" rel="noopener">Ver la plataforma en vivo</a>
+    </div>
+    <div class="trust-chips">
+      <span class="tchip">Sin tarjeta · demo real en minutos</span>
+      <span class="tchip">WhatsApp Business API</span>
+      <span class="tchip">Setup en días, no meses</span>
+      <span class="tchip">Español, con acento colombiano</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHANNEL MARQUEE ============ -->
+<section class="channels">
+  <div class="marquee">
+    <div class="marquee-track" id="chTrack">
+      <!-- se duplica por JS -->
+      <div class="chip"><svg viewBox="0 0 24 24"><path fill="#25D366" d="M12 2a10 10 0 0 0-8.66 15L2 22l5.16-1.35A10 10 0 1 0 12 2Zm5.5 14.2c-.24.66-1.36 1.26-1.9 1.3-.5.05-1.1.24-3.72-.77-3.14-1.24-5.14-4.44-5.3-4.65-.15-.2-1.26-1.68-1.26-3.2 0-1.53.8-2.28 1.1-2.6.28-.3.62-.37.83-.37h.6c.2 0 .45-.04.7.53.25.6.86 2.1.94 2.25.07.15.12.33.02.53-.4.8-.83.92-.61 1.3.8 1.37 1.79 2.46 3.14 3.06.34.15.54.13.74-.1.2-.22.85-1 1.08-1.34.23-.35.46-.28.77-.17.31.12 1.98.94 2.32 1.1.34.18.57.26.65.4.08.14.08.8-.16 1.46Z"/></svg>WhatsApp <small>ventas</small></div>
+      <div class="chip"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="none" stroke="#E1478D" stroke-width="1.8"/><circle cx="12" cy="12" r="4.6" fill="none" stroke="#E1478D" stroke-width="1.8"/><circle cx="17.4" cy="6.6" r="1.3" fill="#E1478D"/></svg>Instagram <small>DM + comentarios</small></div>
+      <div class="chip"><svg viewBox="0 0 24 24"><path fill="#0084FF" d="M12 2C6.5 2 2 6.14 2 11.25c0 2.9 1.45 5.5 3.72 7.2V22l3.4-1.87c.91.25 1.87.39 2.88.39 5.5 0 10-4.14 10-9.26C22 6.14 17.5 2 12 2Zm1 12.46-2.55-2.72-4.98 2.72 5.48-5.82 2.61 2.72 4.92-2.72L13 14.46Z"/></svg>Messenger <small>Facebook</small></div>
+      <div class="chip"><svg viewBox="0 0 24 24"><path fill="#FAF3E7" d="M16.6 3c.36 1.97 1.68 3.5 3.9 3.86v3.05c-1.53.06-2.87-.4-3.94-1.16v6.86A6.13 6.13 0 1 1 10.4 9.5c.35 0 .7.03 1.03.1v3.13a3.06 3.06 0 1 0 2.14 2.92V3h3.03Z"/></svg>TikTok <small>mensajes</small></div>
+      <div class="chip"><svg viewBox="0 0 24 24"><path fill="#2AABEE" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.9 6.6-1.68 7.9c-.12.56-.45.7-.92.43l-2.55-1.88-1.23 1.18c-.14.14-.25.25-.5.25l.18-2.57 4.67-4.22c.2-.18-.05-.28-.31-.1l-5.78 3.64-2.49-.78c-.54-.17-.55-.54.11-.8l9.72-3.74c.45-.17.85.1.7.69Z"/></svg>Telegram <small>bots</small></div>
+      <div class="chip"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4V5Z" fill="none" stroke="#FF7A00" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 9h8M8 12h5" stroke="#FF7A00" stroke-width="1.8" stroke-linecap="round"/></svg>Chat web <small>tu página</small></div>
+      <div class="chip"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z" fill="none" stroke="#38D39F" stroke-width="1.8" stroke-linejoin="round"/></svg>Voz IA <small>llamadas</small></div>
+      <div class="chip"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="#FFB266" stroke-width="1.8"/><path d="m3.5 7 8.5 6 8.5-6" fill="none" stroke="#FFB266" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Email <small>secuencias</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="stats">
+  <div class="wrap">
+    <div class="stats-grid rv">
+      <div class="stat"><div class="n"><em>24/7</em></div><div class="l">Tu empresa nunca duerme</div></div>
+      <div class="stat"><div class="n">&lt;1<em> min</em></div><div class="l">Respuesta a cada lead</div></div>
+      <div class="stat"><div class="n"><em>1</em> cerebro</div><div class="l">Todos los canales y áreas</div></div>
+      <div class="stat"><div class="n">Días<em>,</em> no meses</div><div class="l">Implementación</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MODULES ============ -->
+<section class="modules" id="modulos">
+  <div class="wrap">
+    <span class="kick">La plataforma</span>
+    <h2 class="sec-t rv">Todo lo que tu empresa necesita.<br><em>Moldeado</em> a tu empresa.</h2>
+    <p class="sec-sub rv">No es un software genérico al que te adaptas. Es tu infraestructura: construida sobre tu operación, tus productos y tus procesos.</p>
+    <div class="mod-grid">
+      <div class="mod rv">
+        <span class="mod-n">01</span>
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4V5Z"/><path d="M8 9h8M8 12h5"/></svg></div>
+        <h3>Agente de ventas IA</h3>
+        <p>Atiende cada lead en segundos, cotiza, maneja objeciones y cierra la venta en WhatsApp, Instagram y todos tus canales. Tu equipo solo confirma.</p>
+      </div>
+      <div class="mod rv">
+        <span class="mod-n">02</span>
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7z"/><path d="M15 3v4h4M10 12l1.8 1.8L15.5 10"/></svg></div>
+        <h3>Causación inteligente de facturas</h3>
+        <p>La IA lee tus facturas electrónicas y las causa contra tu software contable. Menos errores, cero digitación, contabilidad al día y más tiempo estratégico.</p>
+      </div>
+      <div class="mod rv">
+        <span class="mod-n">03</span>
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg></div>
+        <h3>CRM 360 a la medida</h3>
+        <p>Bodega, ventas, comercial y facturación conectados en un solo flujo, con pantallas distintas para cada área y roles para todo tu equipo.</p>
+      </div>
+      <div class="mod rv">
+        <span class="mod-n">04</span>
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v4M5 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><circle cx="12" cy="9" r="3.5"/></svg></div>
+        <h3>Agentes por departamento</h3>
+        <p>Cada área con su agente de IA, y la dirección con el suyo: pregúntale por WhatsApp «¿cómo vamos hoy?» y responde con ventas, pedidos y facturas en vivo.</p>
+      </div>
+      <div class="mod rv">
+        <span class="mod-n">05</span>
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 17l5-5 4 4 8-8"/><path d="M15 8h5v5"/></svg></div>
+        <h3>Trazabilidad en vivo</h3>
+        <p>Sigue cada pedido y cada lote de producción de punta a punta —del origen a la entrega— con reportes que tu equipo hace por WhatsApp.</p>
+      </div>
+      <div class="mod rv">
+        <span class="mod-n">06</span>
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4Z"/><path d="M9.5 12l2 2 3.5-3.5"/></svg></div>
+        <h3>Seguridad empresarial</h3>
+        <p>Datos cifrados, acceso por roles y tu información tratada conforme a la ley. Solo tu gente autorizada ve lo que le corresponde.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPS CENTER ============ -->
+<section class="ops" id="operaciones">
+  <div class="wrap">
+    <span class="kick">Centro de Operaciones</span>
+    <h2 class="sec-t rv">Tu empresa entera<br>en <em>una sola pantalla</em>.</h2>
+    <p class="sec-sub rv">La dirección ve las ventas latiendo en vivo, dónde se pierde plata y qué hacer para recuperarla. Sin pedirle el informe a nadie.</p>
+    <div class="ops-frame rv">
+      <div class="ops-bar">
+        <span class="d" style="background:#FF5F57"></span><span class="d" style="background:#FEBC2E"></span><span class="d" style="background:#28C840"></span>
+        <span class="url">app.monkeylabsai.com · Centro de Operaciones</span>
+      </div>
+      <div class="ops-body">
+        <div class="ops-card ops-money">
+          <span class="k">Ventas de hoy · en vivo</span>
+          <div class="big">$<span id="liveMoney">4.218.300</span></div>
+          <div class="sub">▲ 12% vs. ayer · actualizado hace segundos</div>
+        </div>
+        <div class="ops-card">
+          <span class="k">Ventas por canal</span>
+          <div class="bar-row"><span class="bl">WhatsApp</span><div class="bar"><div class="fill" style="width:82%"></div></div><span class="bv">82%</span></div>
+          <div class="bar-row"><span class="bl">Instagram</span><div class="bar"><div class="fill" style="width:46%"></div></div><span class="bv">46%</span></div>
+          <div class="bar-row"><span class="bl">Web</span><div class="bar"><div class="fill" style="width:29%"></div></div><span class="bv">29%</span></div>
+        </div>
+        <div class="ops-card ops-chat">
+          <span class="k">Pregúntale a tu empresa</span>
+          <div class="q">¿Cómo vamos hoy?</div>
+          <div class="a">Vamos en <b>$4.2M</b>, 38 pedidos. El agente cerró 11 ventas mientras dormías 🐒</div>
+        </div>
+        <div class="ops-card">
+          <span class="k">Facturas causadas por IA</span>
+          <div class="bar-row"><span class="bl">Hoy</span><div class="bar"><div class="fill" style="width:94%;background:linear-gradient(90deg,#1f9d74,#38D39F)"></div></div><span class="bv">147</span></div>
+          <div class="bar-row"><span class="bl">Errores</span><div class="bar"><div class="fill" style="width:3%;background:linear-gradient(90deg,#1f9d74,#38D39F)"></div></div><span class="bv">0</span></div>
+          <div class="bar-row"><span class="bl">Horas ahorradas</span><div class="bar"><div class="fill" style="width:68%;background:linear-gradient(90deg,#1f9d74,#38D39F)"></div></div><span class="bv">34 h</span></div>
+        </div>
+        <div class="ops-card">
+          <span class="k">Leads atendidos por IA</span>
+          <div class="bar-row"><span class="bl">Respondidos</span><div class="bar"><div class="fill" style="width:100%"></div></div><span class="bv">100%</span></div>
+          <div class="bar-row"><span class="bl">&lt; 1 min</span><div class="bar"><div class="fill" style="width:97%"></div></div><span class="bv">97%</span></div>
+          <div class="bar-row"><span class="bl">Cerrados</span><div class="bar"><div class="fill" style="width:31%"></div></div><span class="bv">31%</span></div>
+        </div>
+      </div>
+      <div class="ops-foot">
+        <span class="ops-pill"><span class="dd"></span> Agente de ventas activo</span>
+        <span class="ops-pill"><span class="dd"></span> Causación al día</span>
+        <span class="ops-pill"><span class="dd"></span> Trazabilidad en vivo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTEGRATIONS ============ -->
+<section class="integrations" id="integraciones">
+  <div class="wrap" style="text-align:center;margin-bottom:40px">
+    <span class="kick">Integraciones</span>
+    <h2 class="sec-t rv">Se conecta con lo que <em>ya usas</em>.</h2>
+  </div>
+  <div class="marquee int-marquee">
+    <div class="marquee-track" id="intTrack">
+      <div class="chip"><span class="sq"></span>Shopify</div>
+      <div class="chip"><span class="sq"></span>World Office</div>
+      <div class="chip"><span class="sq"></span>Siigo</div>
+      <div class="chip"><span class="sq"></span>Alegra</div>
+      <div class="chip"><span class="sq"></span>VTEX</div>
+      <div class="chip"><span class="sq"></span>HubSpot</div>
+      <div class="chip"><span class="sq"></span>Meta Ads</div>
+      <div class="chip"><span class="sq"></span>WhatsApp Business API</div>
+      <div class="chip"><span class="sq"></span>Wompi</div>
+      <div class="chip"><span class="sq"></span>PayU</div>
+      <div class="chip"><span class="sq"></span>Google Sheets</div>
+      <div class="chip"><span class="sq"></span>Facturación DIAN</div>
+    </div>
+  </div>
+  <p class="int-note">¿Usas otro software? <b>Lo conectamos.</b> Esa es la gracia de una infraestructura a la medida.</p>
+</section>
+
+<!-- ============ PLAN ============ -->
+<section class="plan" id="empresarial">
+  <div class="wrap">
+    <span class="kick">Un solo plan · sin letra pequeña</span>
+    <h2 class="sec-t rv">No vendemos planes.<br>Construimos <em>tu infraestructura</em>.</h2>
+    <div class="plan-card rv">
+      <div class="plan-in">
+        <div class="plan-left">
+          <span class="pl-badge">Plan Empresarial</span>
+          <h3>Todo incluido.<br><em>Moldeado a ti.</em></h3>
+          <p>Básico, avanzado y pro se quedan cortos cuando lo que necesitas es que <b>toda tu operación trabaje sola</b>. Por eso tenemos un solo plan: el que se construye sobre tu empresa.</p>
+          <div class="plan-price">Implementación única + mensualidad según tu operación · <b>Empieza gratis</b></div>
+          <div class="plan-ctas">
+            <a class="btn btn-primary" href="https://wa.me/573057582101?text=Hola%2C%20quiero%20el%20plan%20Empresarial%20de%20Monkey%20Labs" target="_blank" rel="noopener">Pruébalo gratis</a>
+            <a class="btn btn-ghost" href="https://app.monkeylabsai.com" target="_blank" rel="noopener">Ver demo en vivo</a>
+          </div>
+        </div>
+        <div class="plan-list">
+          <div class="pli"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="rgba(255,122,0,.12)" stroke="#FF7A00"/><path d="m6.5 10.2 2.3 2.3 4.7-4.8" fill="none" stroke="#FF7A00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Agente de ventas IA en todos tus canales<small>WhatsApp, Instagram, Messenger, TikTok, Telegram, web</small></div></div>
+          <div class="pli"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="rgba(255,122,0,.12)" stroke="#FF7A00"/><path d="m6.5 10.2 2.3 2.3 4.7-4.8" fill="none" stroke="#FF7A00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Causación inteligente de facturas<small>DIAN → tu software contable, sin digitación</small></div></div>
+          <div class="pli"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="rgba(255,122,0,.12)" stroke="#FF7A00"/><path d="m6.5 10.2 2.3 2.3 4.7-4.8" fill="none" stroke="#FF7A00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><div>CRM 360 construido a tu medida<small>Pantallas por departamento, hasta 100 usuarios con roles</small></div></div>
+          <div class="pli"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="rgba(255,122,0,.12)" stroke="#FF7A00"/><path d="m6.5 10.2 2.3 2.3 4.7-4.8" fill="none" stroke="#FF7A00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Centro de Operaciones para la dirección<small>Ventas en vivo, fugas de dinero, benchmarking</small></div></div>
+          <div class="pli"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="rgba(255,122,0,.12)" stroke="#FF7A00"/><path d="m6.5 10.2 2.3 2.3 4.7-4.8" fill="none" stroke="#FF7A00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Agentes de IA por departamento y dirección<small>Tu ERP responde por WhatsApp, al instante</small></div></div>
+          <div class="pli"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="rgba(255,122,0,.12)" stroke="#FF7A00"/><path d="m6.5 10.2 2.3 2.3 4.7-4.8" fill="none" stroke="#FF7A00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Trazabilidad de pedidos y producción<small>Del origen al cliente final, en vivo</small></div></div>
+          <div class="pli"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="rgba(255,122,0,.12)" stroke="#FF7A00"/><path d="m6.5 10.2 2.3 2.3 4.7-4.8" fill="none" stroke="#FF7A00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Reportes para dirección e inversionistas<small>Ventas, producción y crecimiento presentables</small></div></div>
+          <div class="pli"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="rgba(255,122,0,.12)" stroke="#FF7A00"/><path d="m6.5 10.2 2.3 2.3 4.7-4.8" fill="none" stroke="#FF7A00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><div>Soporte directo, capacitación y mejoras<small>24/7 con Monkey Labs, nunca terceros</small></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="process">
+  <div class="wrap">
+    <span class="kick">Cómo arrancamos</span>
+    <h2 class="sec-t rv">De cero a operando en <em>días</em>.</h2>
+    <div class="proc-grid">
+      <div class="proc rv">
+        <span class="pn">01</span>
+        <h3>Diagnóstico</h3>
+        <p>Mapeamos tu operación completa: canales, procesos, software actual y dónde se está fugando la plata.</p>
+        <span class="pt">Sin costo · 1 sesión</span>
+      </div>
+      <div class="proc rv">
+        <span class="pn">02</span>
+        <h3>Moldeado</h3>
+        <p>Construimos tu infraestructura sobre tu operación real: tus productos, tus precios, tus reglas, tu gente.</p>
+        <span class="pt">Días, no meses</span>
+      </div>
+      <div class="proc rv">
+        <span class="pn">03</span>
+        <h3>Operación 24/7</h3>
+        <p>Tu empresa trabajando sola, con soporte directo, capacitación continua y mejoras cada mes.</p>
+        <span class="pt">Soporte directo Monkey Labs</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div style="text-align:center">
+      <span class="kick">Lo que todos preguntan</span>
+      <h2 class="sec-t rv">¿Esto sirve para una empresa <em>como la mía</em>?</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item rv">
+        <summary>¿La IA no suena a robot? <span class="pm">+</span></summary>
+        <div class="fa">Escríbele a nuestro agente y júzgalo tú. Habla <b>español natural, con acento colombiano</b>, entiende contexto, cotiza y maneja objeciones. La mayoría de los clientes no nota que no es humano — y cuando la venta está lista, entra tu equipo a cerrar.</div>
+      </details>
+      <details class="faq-item rv">
+        <summary>¿Necesito saber de tecnología? <span class="pm">+</span></summary>
+        <div class="fa">No. Nosotros construimos, conectamos y mantenemos todo. Tu equipo lo usa <b>desde WhatsApp y un dashboard</b>, con capacitación incluida. Si algo falla, lo arreglamos nosotros directo, sin terceros.</div>
+      </details>
+      <details class="faq-item rv">
+        <summary>¿Esto no es carísimo y lento como un ERP? <span class="pm">+</span></summary>
+        <div class="fa">Al revés: por eso existimos. Implementación en <b>días, no meses</b>, y una inversión pensada para empresas reales de Latinoamérica, no presupuestos de multinacional. El diagnóstico inicial es gratis y sales con números concretos.</div>
+      </details>
+      <details class="faq-item rv">
+        <summary>¿Qué pasa con mis datos? <span class="pm">+</span></summary>
+        <div class="fa">Tus datos son <b>tuyos</b>. Cifrado, acceso por roles y tratamiento conforme a la ley de protección de datos. Solo tu gente autorizada ve la información de tu empresa.</div>
+      </details>
+      <details class="faq-item rv">
+        <summary>¿Y si uso un software que no conocen? <span class="pm">+</span></summary>
+        <div class="fa">Lo conectamos. Nuestra infraestructura se moldea a tu operación — <b>tu software actual no es un problema, es el punto de partida.</b></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final">
+  <div class="final-mesh" aria-hidden="true"></div>
+  <div class="wrap">
+    <h2 class="rv">Tu empresa trabajando <em>24/7</em>.<br>Empezando hoy.</h2>
+    <p class="rv">Escríbenos y en la misma conversación te mostramos tu operación funcionando con IA. Sin PowerPoints. Sin compromiso.</p>
+    <div class="hero-ctas rv">
+      <a class="btn btn-primary" href="https://wa.me/573057582101?text=Hola%2C%20quiero%20ver%20mi%20empresa%20funcionando%20con%20Monkey%20Labs" target="_blank" rel="noopener">Pruébalo gratis
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <span class="hero-note rv">Responde un founder, hoy · WhatsApp +57 305 758 2101</span>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"¿Los agentes de IA suenan a robot?","acceptedAnswer":{"@type":"Answer","text":"No. Hablan español natural con acento colombiano, entienden contexto, cotizan y manejan objeciones. Cuando la venta está lista, entra tu equipo humano a cerrar."}},
+{"@type":"Question","name":"¿Necesito saber de tecnología para usar Monkey Labs?","acceptedAnswer":{"@type":"Answer","text":"No. Monkey Labs construye, conecta y mantiene toda la infraestructura. Tu equipo la usa desde WhatsApp y un dashboard, con capacitación y soporte directo incluidos."}},
+{"@type":"Question","name":"¿Cuánto tarda la implementación?","acceptedAnswer":{"@type":"Answer","text":"Días, no meses. El diagnóstico inicial es gratuito y la infraestructura se moldea sobre la operación real de tu empresa."}},
+{"@type":"Question","name":"¿Qué pasa con los datos de mi empresa?","acceptedAnswer":{"@type":"Answer","text":"Los datos son de tu empresa: cifrado, acceso por roles y tratamiento conforme a la ley de protección de datos."}}
+]}
+</script>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap foot-in">
+    <div class="foot-l">
+      <img src="img/logo-monkey.png" alt="Monkey Labs">
+      <span>© 2026 Monkey Labs AI · Hecho en Colombia 🇨🇴</span>
+    </div>
+    <div class="foot-r">
+      <a href="https://wa.me/573057582101" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="mailto:nicolas@monkeylabsai.com">nicolas@monkeylabsai.com</a>
+      <a href="https://app.monkeylabsai.com" target="_blank" rel="noopener">Demo</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// duplicar marquees para loop infinito
+["chTrack","intTrack"].forEach(function(id){
+  var t=document.getElementById(id);
+  if(t) t.innerHTML+=t.innerHTML;
+});
+// reveal on scroll
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll(".rv").forEach(function(el){io.observe(el)});
+// contador de ventas en vivo (sube de a poquitos)
+(function(){
+  var el=document.getElementById("liveMoney"); if(!el) return;
+  var v=4218300;
+  function fmt(n){return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,".")}
+  setInterval(function(){ v+=Math.floor(Math.random()*90000)+8000; el.textContent=fmt(v); }, 3800);
+})();
+</script>
+</body>
+</html>
